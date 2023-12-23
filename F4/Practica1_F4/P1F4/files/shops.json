@@ -1,0 +1,62 @@
+[
+  {
+    "name": "qwe",
+    "description": "qwe",
+    "since": 123,
+    "earnings": 26.16462,
+    "businessModelObject": {
+      "loyaltyThreshold": 35.0
+    },
+    "productCatalog": {
+      "products": [
+        {
+          "iva": 5,
+          "name": "poi",
+          "brand": "Poi",
+          "category": "SUPER_REDUCED",
+          "maxPrice": 4.0,
+          "rating": [],
+          "price": 3.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "a",
+    "description": "a",
+    "since": 12,
+    "earnings": 1363.484,
+    "businessModelObject": {},
+    "productCatalog": {
+      "products": [
+        {
+          "iva": 21,
+          "name": "GTA VI",
+          "brand": "Viladrau Games",
+          "category": "GENERAL",
+          "maxPrice": 79.99,
+          "rating": [],
+          "price": 79.99
+        },
+        {
+          "iva": 10,
+          "name": "Xiuxo de Crema",
+          "brand": "Viladrau Bakery",
+          "category": "REDUCED",
+          "maxPrice": 5.5,
+          "rating": [],
+          "price": 5.5
+        },
+        {
+          "iva": 5,
+          "name": "Billet de Tram",
+          "brand": "Viladrau Mobility",
+          "category": "SUPER_REDUCED",
+          "maxPrice": 2.25,
+          "rating": [],
+          "price": 2.25
+        }
+      ]
+    }
+  }
+]

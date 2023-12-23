@@ -1,0 +1,13 @@
+Main -> OK
+Controller -> Relacion con view, productManager, shopManager, pruductManager y cartManager
+    - Atributos -> OK
+    - Constructor -> OK
+    - Metodo run -> OK
+    - Metodo startProgram -> OK
+    - Metodo managerProducts -> OK
+    - Metodo createProduct -> OK
+
+ProductManager
+    - metodo checkProductJSON -> OK
+    - metodo productUniqueName -> OK
+    - metodo stringFormat -> OK

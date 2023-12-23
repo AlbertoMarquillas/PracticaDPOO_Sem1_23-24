@@ -1,0 +1,137 @@
+[
+  {
+    "name": "q",
+    "description": "q",
+    "since": 7,
+    "earnings": 300.0,
+    "businessModelObject": {
+      "model": "MAX_PROFIT"
+    },
+    "productCatalog": {
+      "products": [
+        {
+          "name": "b",
+          "brand": "Watch Apple",
+          "category": "GENERAL",
+          "maxPrice": 1000.0,
+          "price": 50.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "w",
+    "description": "w",
+    "since": 4,
+    "earnings": 6.0,
+    "businessModelObject": {
+      "model": "LOYALTY"
+    },
+    "productCatalog": {
+      "products": [
+        {
+          "name": "b",
+          "brand": "Watch Apple",
+          "category": "GENERAL",
+          "maxPrice": 1000.0,
+          "price": 15.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "e",
+    "description": "e",
+    "since": 5,
+    "earnings": 0.0,
+    "businessModelObject": {
+      "model": "SPONSORED"
+    },
+    "productCatalog": {
+      "products": []
+    }
+  },
+  {
+    "name": "y",
+    "description": "y",
+    "since": 4,
+    "earnings": 0.0,
+    "businessModelObject": {
+      "model": "SPONSORED"
+    },
+    "productCatalog": {
+      "products": []
+    }
+  },
+  {
+    "name": "Big Shop of Horrors",
+    "description": "We just sell regular plants",
+    "since": 1960,
+    "earnings": 0.0,
+    "businessModelObject": {
+      "model": "LOYALTY"
+    },
+    "productCatalog": {
+      "products": []
+    }
+  },
+  {
+    "name": "prova",
+    "description": "provem amb proves que aprovarem",
+    "since": 6969,
+    "earnings": 0.0,
+    "businessModelObject": {
+      "model": "LOYALTY"
+    },
+    "productCatalog": {
+      "products": []
+    }
+  },
+  {
+    "name": "EE",
+    "description": "EE",
+    "since": 12,
+    "earnings": 6.0,
+    "businessModelObject": {
+      "model": "MAX_PROFIT"
+    },
+    "productCatalog": {
+      "products": [
+        {
+          "name": "Ibuprofen Capsules",
+          "brand": "Generic Pharma",
+          "category": "SUPER_REDUCED",
+          "maxPrice": 5.55,
+          "price": 3.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "a",
+    "description": "asdf",
+    "since": 1234,
+    "earnings": 0.0,
+    "businessModelObject": {
+      "model": "LOYALTY"
+    },
+    "productCatalog": {
+      "products": [
+        {
+          "name": "b",
+          "brand": "Watch Apple",
+          "category": "GENERAL",
+          "maxPrice": 1000.0,
+          "rating": [
+            "1* wowowowow ta gueno primo",
+            "3* goood cabron",
+            "1* mierdon loquete",
+            "4* I have no string feelings",
+            "3* eldiablo "
+          ],
+          "price": 1000.0
+        }
+      ]
+    }
+  }
+]

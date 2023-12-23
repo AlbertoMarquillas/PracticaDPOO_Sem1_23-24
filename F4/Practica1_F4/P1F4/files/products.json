@@ -1,0 +1,58 @@
+[
+  {
+    "iva": 10,
+    "name": "qwe",
+    "brand": "Qwe",
+    "category": "REDUCED",
+    "maxPrice": 35.0,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "iva": 5,
+    "name": "poi",
+    "brand": "Poi",
+    "category": "SUPER_REDUCED",
+    "maxPrice": 4.0,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "iva": 21,
+    "name": "asd",
+    "brand": "Asd",
+    "category": "GENERAL",
+    "maxPrice": 35.0,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "iva": 21,
+    "name": "GTA VI",
+    "brand": "Viladrau Games",
+    "category": "GENERAL",
+    "maxPrice": 79.99,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "iva": 10,
+    "name": "Xiuxo de Crema",
+    "brand": "Viladrau Bakery",
+    "category": "REDUCED",
+    "maxPrice": 5.5,
+    "rating": [
+      "3* ok"
+    ],
+    "price": 0.0
+  },
+  {
+    "iva": 5,
+    "name": "Billet de Tram",
+    "brand": "Viladrau Mobility",
+    "category": "SUPER_REDUCED",
+    "maxPrice": 2.25,
+    "rating": [],
+    "price": 0.0
+  }
+]

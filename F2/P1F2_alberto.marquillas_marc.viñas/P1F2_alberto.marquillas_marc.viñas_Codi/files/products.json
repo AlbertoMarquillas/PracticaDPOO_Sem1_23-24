@@ -1,0 +1,100 @@
+[
+  {
+    "name": "Bouquet of Roses",
+    "brand": "La Salle Gardening",
+    "category": "GENERAL",
+    "maxPrice": 79.99,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "name": "Xuixo de Crema",
+    "brand": "Viladrau Bakery",
+    "category": "REDUCED",
+    "maxPrice": 5.5,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "name": "The Neverending Story",
+    "brand": "Book Publishers Incorporated",
+    "category": "SUPER_REDUCED",
+    "maxPrice": 99.0,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "name": "Cool plant",
+    "brand": "Not An Alien Corp",
+    "category": "GENERAL",
+    "maxPrice": 50.0,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "name": "apple watch",
+    "brand": "A",
+    "category": "REDUCED",
+    "maxPrice": 4.0,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "name": "b",
+    "brand": "Watch Apple",
+    "category": "GENERAL",
+    "maxPrice": 1000.0,
+    "rating": [
+      "1* wowowowow ta gueno primo",
+      "3* goood cabron",
+      "1* mierdon loquete",
+      "4* I have no string feelings",
+      "3* eldiablo "
+    ],
+    "price": 0.0
+  },
+  {
+    "name": "hola",
+    "brand": "Apple Pen",
+    "category": "REDUCED",
+    "maxPrice": 50.0,
+    "rating": [
+      "4* okay"
+    ],
+    "price": 0.0
+  },
+  {
+    "name": "beer",
+    "brand": "La Casa",
+    "category": "GENERAL",
+    "maxPrice": 12.5,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "name": "Ibuprofen Capsules",
+    "brand": "Generic Pharma",
+    "category": "SUPER_REDUCED",
+    "maxPrice": 5.55,
+    "rating": [
+      "4* ok"
+    ],
+    "price": 0.0
+  },
+  {
+    "name": "hey",
+    "brand": "Hey",
+    "category": "SUPER_REDUCED",
+    "maxPrice": 55.5,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "name": "s",
+    "brand": "Asd Tuwtgth Jths",
+    "category": "REDUCED",
+    "maxPrice": 100.0,
+    "rating": [],
+    "price": 0.0
+  }
+]
