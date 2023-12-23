@@ -316,6 +316,7 @@ public class Controller {
             if (!productManager.productUniqueName(productName)) {
                 float productPrice = view.showAskForPrice();
                 if (productCatalogManager.checkProductPrice(productPrice, productName)) {
+
                     if(productCatalogManager.addProduct(productName, shopName, productPrice)) {
                         String brand = productManager.getBrandFromProduct(productName);
                         view.confirmExp(productName, brand ,shopName);
@@ -506,6 +507,14 @@ public class Controller {
             String descr = shopManager.getDescrFromName(shopName);
             float earnings = shopManager.getEarnings(shopName);
             String businessModel = shopManager.getBusinessModel(shopName);
+            float loyaltyThres = 0;
+            String sponsor = null;
+            if (businessModel.equalsIgnoreCase("LOYALTY")) {
+                loyaltyThres = shopManager.getLoyalty(shopName);
+            }
+            if (businessModel.equalsIgnoreCase("SPONSORED")){
+                sponsor = shopManager.getSponsor(shopName);
+            }
 
             ArrayList<String> prodName = shopManager.getProdFromCat(shopName);
             ArrayList<String> brand = shopManager.getBrandFromCat(shopName);
@@ -533,7 +542,7 @@ public class Controller {
                         switch (catOption) {
                             case 1 -> readReviews(prodName.get(interest-1), brand.get(interest-1));
                             case 2 -> reviewProduct(prodName.get(interest-1), brand.get(interest-1));
-                            case 3 -> addToCart(prodName.get(interest-1), brand.get(interest-1), shopName, Float.parseFloat(price.get(interest-1)), category.get(interest-1), fundationYear, descr, earnings, businessModel);
+                            case 3 -> addToCart(prodName.get(interest-1), brand.get(interest-1), shopName, Float.parseFloat(price.get(interest-1)), category.get(interest-1), fundationYear, descr, earnings, businessModel, loyaltyThres, sponsor);
                             default -> view.showWrongOption(1, 3);
                         }
 
@@ -557,8 +566,8 @@ public class Controller {
      * @param shopName la tienda donde se vende el producto.
      * @param price el precio del producto.
      */
-    public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel) {
-        cartManager.addToCart(productName, brand, shopName, price, category, fundationYear, descr, earnings, businessModel);
+    public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor) {
+        cartManager.addToCart(productName, brand, shopName, price, category, fundationYear, descr, earnings, businessModel, loyaltyThres, sponsor);
         view.spacing();
         view.showAddToCart(productName, brand);
         view.spacing();
@@ -641,6 +650,7 @@ public class Controller {
                 ArrayList<String> products = cartManager.getCartProds();
                 for (String product: products){
                     if (shopManager.getProdFromCat(shop).contains(product)) {
+                        //ingresos nets per a la botiga
                         price = cartManager.calculateTaxes(shop, i);
                         totalPrice = totalPrice + price;
                         earnings = shopManager.getEarnings(shop) + price;

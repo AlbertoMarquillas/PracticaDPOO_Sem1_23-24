@@ -5,6 +5,8 @@ import Business.Entities.CartItem;
 import Business.Entities.HerenciasProduct.General;
 import Business.Entities.HerenciasProduct.Reduced;
 import Business.Entities.HerenciasProduct.SuperReduced;
+import Business.Entities.HerenciasShop.Loyalty;
+import Business.Entities.HerenciasShop.Sponsored;
 import Business.Entities.Product;
 import Business.Entities.Shop;
 
@@ -42,11 +44,32 @@ public class CartManager {
     public float sumTotalPrice() {
 
         float totalPrice = 0;
+        float prodPrice = 0;
+        ArrayList<CartItem> cartItems = cart.getCartItems();
 
+        boolean sponsored = false;
 
+        for(CartItem cartItem: cartItems){
 
-        for(CartItem cartItem: cart.getCartItems()){
-            totalPrice = totalPrice + cartItem.getProduct().getPrice();
+            if (cartItem.getShop().getBusinessModel().getModel().equalsIgnoreCase("LOYALTY")) {
+                if (totalPrice >= ((Loyalty) cartItem.getShop().getBusinessModel()).getLoyaltyThreshold()) {
+                    prodPrice = cartItem.getProduct().applyIVA(cartItem.getProduct().getPrice());
+                } else {
+                    prodPrice = cartItem.getProduct().getPrice();
+                }
+
+            } else if (cartItem.getShop().getBusinessModel().getModel().equalsIgnoreCase("SPONSORED")){
+                sponsored = true;
+                prodPrice = cartItem.getProduct().getPrice();
+            }
+            else {
+                prodPrice = cartItem.getProduct().getPrice();
+            }
+
+            totalPrice = totalPrice + prodPrice;
+        }
+        if (sponsored) {
+            totalPrice = totalPrice / 10;
         }
 
         return totalPrice;
@@ -75,7 +98,7 @@ public class CartManager {
      * @param earnings
      * @return
      */
-    public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel) {
+    public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor) {
 
         boolean added = false;
 
@@ -93,6 +116,7 @@ public class CartManager {
             Shop shop = null;
             Product product = null;
             CartItem cartItem = new CartItem();
+
             switch (category) {
                 case "GENERAL" -> product = new General(productName, brand, category, 0, null, price);
                 case "REDUCED" -> product = new Reduced(productName, brand, category, 0, null, price);
@@ -100,8 +124,8 @@ public class CartManager {
             }
             switch (businessModel) {
                 case "MAX_PROFIT" -> shop = new Shop(shopName,descr, fundationYear, businessModel, 0, null);
-                case "LOYALTY" -> shop = new Shop(shopName,descr, fundationYear, businessModel, 0, null);
-                case "SPONSORED" -> shop = new Shop(shopName,descr, fundationYear, businessModel, 0, "");
+                case "LOYALTY" -> shop = new Shop(shopName,descr, fundationYear, businessModel, loyaltyThres, null);
+                case "SPONSORED" -> shop = new Shop(shopName,descr, fundationYear, businessModel, 0,sponsor);
             }
             cartItem.setProduct(product);
             cartItem.setShop(shop);

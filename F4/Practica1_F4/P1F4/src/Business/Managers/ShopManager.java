@@ -450,4 +450,25 @@ public class ShopManager {
 
         return businessModel.getModel();
     }
+
+    public Shop getShopFromString(String shop) {
+        ArrayList<Shop> shops = readAll();
+        for (Shop shop1: shops){
+            if (shop1.getName().equalsIgnoreCase(shop)){
+                return shop1;
+            }
+        }
+        return null;
+    }
+
+    public float getLoyalty(String shopName) {
+        Shop shop = getShopFromString(shopName);
+        return ((Loyalty)shop.getBusinessModel()).getLoyaltyThreshold();
+    }
+
+    public String getSponsor(String shopName) {
+        Shop shop = getShopFromString(shopName);
+        return ((Sponsored)shop.getBusinessModel()).getSponsoringBrand();
+    }
 }
+
