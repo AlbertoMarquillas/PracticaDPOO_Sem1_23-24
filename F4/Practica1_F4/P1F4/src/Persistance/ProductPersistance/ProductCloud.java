@@ -160,6 +160,7 @@ public class ProductCloud implements ProductDAO{
         int flag = 0;
         ArrayList<Product> products = readAll();
         products.add(product);
+        api.deleteFromUrl(pathString);
         for (Product prod: products) {
             try {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();

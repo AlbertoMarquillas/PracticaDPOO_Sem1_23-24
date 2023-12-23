@@ -50,15 +50,19 @@ public class Controller {
 
 
 
+
         try {
             ApiHelper apiHelper = new ApiHelper();
             String pathString = "https://balandrau.salle.url.edu/dpoo/P1-G109/shops";
+            String pathString2 = "https://balandrau.salle.url.edu/dpoo/P1-G109/products";
 
-            apiHelper.deleteFromUrl(pathString);
+            //apiHelper.deleteFromUrl(pathString);
+            //apiHelper.deleteFromUrl(pathString2);
 
         } catch (ApiException e) {
             throw new RuntimeException(e);
-        }*/
+        }
+        */
 
         startProgram();
         int data = checkProgram();
