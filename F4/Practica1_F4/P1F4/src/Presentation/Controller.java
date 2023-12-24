@@ -113,7 +113,6 @@ public class Controller {
         }
     }
 
-
     /**
      * Gestiona las operaciones relacionadas con los productos
      */
@@ -372,7 +371,7 @@ public class Controller {
     /**
      * Realiza búsquedas de productos
      */
-    public void searchProducts() {
+    public void searchProducts() it{
 
         int i = 0;
         boolean printed = false;
@@ -481,6 +480,7 @@ public class Controller {
         String finalRating = rating + "* " + comment;
 
         if (productManager.addRating(finalRating, prod)) {
+            shopManager.addProductToCatalogueRaiting(prod, finalRating);
             view.spacing();
             view.thankForRev(prod, brand);
             view.spacing();
@@ -539,10 +539,11 @@ public class Controller {
 
                     do{
                         catOption = view.showCatalogMenu();
+                        ArrayList<String> reviews = shopManager.getRatingFromCat(shopName, prodName.get(interest-1));
                         switch (catOption) {
                             case 1 -> readReviews(prodName.get(interest-1), brand.get(interest-1));
                             case 2 -> reviewProduct(prodName.get(interest-1), brand.get(interest-1));
-                            case 3 -> addToCart(prodName.get(interest-1), brand.get(interest-1), shopName, Float.parseFloat(price.get(interest-1)), category.get(interest-1), fundationYear, descr, earnings, businessModel, loyaltyThres, sponsor);
+                            case 3 -> addToCart(prodName.get(interest-1), brand.get(interest-1), shopName, Float.parseFloat(price.get(interest-1)), category.get(interest-1), fundationYear, descr, earnings, businessModel, loyaltyThres, sponsor, reviews);
                             default -> view.showWrongOption(1, 3);
                         }
 
@@ -566,8 +567,12 @@ public class Controller {
      * @param shopName la tienda donde se vende el producto.
      * @param price el precio del producto.
      */
-    public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor) {
-        cartManager.addToCart(productName, brand, shopName, price, category, fundationYear, descr, earnings, businessModel, loyaltyThres, sponsor);
+    public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor, ArrayList<String> reviews) {
+
+        float totalPrice = 0;
+
+        cartManager.addToCart(productName, brand, shopName, price, category, fundationYear, descr, earnings, businessModel, loyaltyThres, sponsor, reviews);
+
         view.spacing();
         view.showAddToCart(productName, brand);
         view.spacing();
@@ -580,15 +585,18 @@ public class Controller {
 
         view.showCartTitle();
 
-        ArrayList<String> productsCarts = cartManager.getCartProds();
+        ArrayList<String> shops = cartManager.getShopCart();
+
+        float totalPrice = 0;
+
+        ArrayList<String> products = cartManager.getCartProds();
         ArrayList<String> brands = cartManager.getCartBrands();
         ArrayList<Float> prices = cartManager.getCartPrice();
-        ArrayList<String> shops = cartManager.getShopCart();
         ArrayList<String> cantidades = cartManager.getCantidades();
 
-        view.totalCart(productsCarts, brands, prices, cantidades);
+        view.totalCart(products, brands, prices, cantidades);
 
-        float totalPrice = cartManager.sumTotalPrice();
+        totalPrice = cartManager.sumTotalPrice();
 
         view.showTotalPrice(totalPrice);
         view.spacing();
@@ -666,8 +674,6 @@ public class Controller {
                     break;
                 }
             }
-
-
 
             view.spacing();
             if (cartManager.emptyCart()) {

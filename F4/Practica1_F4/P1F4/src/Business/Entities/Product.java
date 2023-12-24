@@ -110,6 +110,10 @@ public abstract class Product {
      *
      * @param rating Puntuación del producto.
      */
+    public void setAllRating(ArrayList<String> rating) {
+        this.rating.clear();
+        this.rating.addAll(rating);
+    }
     public void setRating(String rating) {
         this.rating.add(rating);
     }

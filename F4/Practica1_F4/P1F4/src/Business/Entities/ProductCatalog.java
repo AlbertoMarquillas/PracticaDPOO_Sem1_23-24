@@ -127,4 +127,27 @@ public class ProductCatalog {
         }
         return prices;
     }
+
+    public ArrayList<String> getProductRating(String prodName) {
+        ArrayList<Product> products = listProducts();
+        ArrayList<String> ratings = new ArrayList<>();
+
+        for (Product product: products)  {
+            if (product.getName().equalsIgnoreCase(prodName)) {
+                return product.getRating();
+            }
+        }
+        return ratings;
+    }
+
+    public void setProductRating(String prod, String finalRating) {
+        ArrayList<Product> products = listProducts();
+        ArrayList<String> ratings = new ArrayList<>();
+
+        for (Product product: products)  {
+            if (product.getName().equalsIgnoreCase(prod)) {
+                product.setRating(finalRating);
+            }
+        }
+    }
 }

@@ -2,7 +2,6 @@ package Business.Managers;
 
 import Business.Entities.BusinessModel;
 import Business.Entities.HerenciasShop.Loyalty;
-import Business.Entities.HerenciasShop.MaxProfit;
 import Business.Entities.HerenciasShop.Sponsored;
 import Business.Entities.Product;
 import Business.Entities.ProductCatalog;
@@ -469,6 +468,46 @@ public class ShopManager {
     public String getSponsor(String shopName) {
         Shop shop = getShopFromString(shopName);
         return ((Sponsored)shop.getBusinessModel()).getSponsoringBrand();
+    }
+
+    public ArrayList<String> getRatingFromCat(String shopName, String prodName) {
+        ArrayList<String> ratings = new ArrayList<>();
+        ArrayList<Shop> shops = readAll();
+
+        for (Shop shop: shops) {
+            if (shop.getName().equalsIgnoreCase(shopName)) {
+                for(String prod: shop.getProductCatalog().toArrayString()) {
+                    if (prod.equalsIgnoreCase(prodName)) {
+                        return shop.getProductCatalog().getProductRating(prodName);
+                    }
+                }
+            }
+        }
+
+        return ratings;
+    }
+
+    public void addProductToCatalogueRaiting(String prod,String finalRating) {
+        ArrayList<Shop> shops = readAll();
+
+
+
+        for (Shop shop: shops) {
+            ArrayList<String> prods = shop.getProductCatalog().toArrayString();
+            for (String product : prods) {
+
+                if (prod.equalsIgnoreCase(product)) {
+                    try {
+                        shop.getProductCatalog().setProductRating(product, finalRating);
+                        shopDAO.update(shop);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+            }
+        }
+
     }
 }
 

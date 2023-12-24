@@ -97,11 +97,16 @@ public class ProductCloud implements ProductDAO{
         int flag = 0;
         ArrayList<Product> products = readAll();
 
-        for(int i = 0; i < products.size(); i++) {
-            api.deleteFromUrl(pathString + "/" + i);
-        }
+
+
+        api.deleteFromUrl(pathString);
+
+
 
         for (Product prod: products) {
+            if (prod.getName().equalsIgnoreCase(product.getName())) {
+                prod.setAllRating(product.getRating());
+            }
             try {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 if (api.postToUrl(pathString, gson.toJson(prod)) != null) {

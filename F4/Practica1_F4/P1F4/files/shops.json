@@ -15,7 +15,9 @@
           "brand": "Poi",
           "category": "SUPER_REDUCED",
           "maxPrice": 4.0,
-          "rating": [],
+          "rating": [
+            "3* yes"
+          ],
           "price": 3.0
         }
       ]
@@ -55,6 +57,17 @@
           "maxPrice": 2.25,
           "rating": [],
           "price": 2.25
+        },
+        {
+          "iva": 10,
+          "name": "dfg",
+          "brand": "Dfg",
+          "category": "REDUCED",
+          "maxPrice": 12.0,
+          "rating": [
+            "3* dfg"
+          ],
+          "price": 10.0
         }
       ]
     }

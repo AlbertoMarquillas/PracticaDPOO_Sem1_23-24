@@ -6,7 +6,6 @@ import Business.Entities.HerenciasProduct.General;
 import Business.Entities.HerenciasProduct.Reduced;
 import Business.Entities.HerenciasProduct.SuperReduced;
 import Business.Entities.HerenciasShop.Loyalty;
-import Business.Entities.HerenciasShop.Sponsored;
 import Business.Entities.Product;
 import Business.Entities.Shop;
 
@@ -96,9 +95,10 @@ public class CartManager {
      * @param fundationYear
      * @param descr
      * @param earnings
+     * @param reviews
      * @return
      */
-    public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor) {
+    public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor, ArrayList<String> reviews) {
 
         boolean added = false;
 
@@ -118,9 +118,39 @@ public class CartManager {
             CartItem cartItem = new CartItem();
 
             switch (category) {
-                case "GENERAL" -> product = new General(productName, brand, category, 0, null, price);
-                case "REDUCED" -> product = new Reduced(productName, brand, category, 0, null, price);
-                case "SUPER_REDUCED" -> product = new SuperReduced(productName, brand, category, 0, null, price);
+                case "GENERAL" -> product = new General(productName, brand, category, 0, reviews, price);
+                case "REDUCED" -> {
+                    product = new Reduced(productName, brand, category, 0, reviews, price);
+                    int cantidad = 0;
+                    int totalRating = 0;
+                    if (reviews.size() > 0) {
+                        for (String rating: reviews) {
+                            totalRating = totalRating + rating.charAt(0);
+                            cantidad++;
+
+                        }
+                        if (cantidad > 0){
+                            totalRating = totalRating/cantidad;
+                        } else {
+                            totalRating = 0;
+                        }
+                    }
+
+                    if(Float.parseFloat(String.valueOf(totalRating)) >= 3.5){
+                        price = price - ((Reduced)product).applyRatingIVA(price);
+                        product.setPrice(price);
+                        System.out.println("Hola");
+                    } else {
+                        System.out.println("Adios");
+                    }
+                }
+                case "SUPER_REDUCED" -> {
+                    product = new SuperReduced(productName, brand, category, 0, null, price);
+                    if (price >= 100.0) {
+                        price = ((SuperReduced) product).applySuperReducedIVA(price);
+                        product.setPrice(price);
+                    }
+                }
             }
             switch (businessModel) {
                 case "MAX_PROFIT" -> shop = new Shop(shopName,descr, fundationYear, businessModel, 0, null);
