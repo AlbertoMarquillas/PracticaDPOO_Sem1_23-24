@@ -26,7 +26,6 @@ public class Controller {
 
     static final int CLOUD = 0;
     static final int JSON = 1;
-    static final int ERROR_PERSISTANCE = 1;
 
     /**
      * Constructor de la clase Controller.
@@ -570,7 +569,7 @@ public class Controller {
     public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor, ArrayList<String> reviews) {
 
         float totalPrice = 0;
-
+        //No se aplica la category del producto pero si el modelo de la tienda aqui
         cartManager.addToCart(productName, brand, shopName, price, category, fundationYear, descr, earnings, businessModel, loyaltyThres, sponsor, reviews);
 
         view.spacing();

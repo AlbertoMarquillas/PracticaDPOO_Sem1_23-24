@@ -246,7 +246,7 @@ public class CartManager {
 
         if(cartItem.getShop().getName().equalsIgnoreCase(shop)) {
             float price = cartItem.getProduct().getPrice();
-            prodPrice = price - cartItem.getProduct().applyIVA(price);
+            prodPrice = price - cartItem.getProduct().applyModel();
 
         }
         return prodPrice;

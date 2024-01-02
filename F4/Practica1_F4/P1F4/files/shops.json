@@ -8,31 +8,18 @@
       "loyaltyThreshold": 35.0
     },
     "productCatalog": {
-      "products": [
-        {
-          "iva": 5,
-          "name": "poi",
-          "brand": "Poi",
-          "category": "SUPER_REDUCED",
-          "maxPrice": 4.0,
-          "rating": [
-            "3* yes"
-          ],
-          "price": 3.0
-        }
-      ]
+      "products": []
     }
   },
   {
     "name": "a",
     "description": "a",
     "since": 12,
-    "earnings": 1363.484,
+    "earnings": 1489.8682,
     "businessModelObject": {},
     "productCatalog": {
       "products": [
         {
-          "iva": 21,
           "name": "GTA VI",
           "brand": "Viladrau Games",
           "category": "GENERAL",
@@ -41,7 +28,6 @@
           "price": 79.99
         },
         {
-          "iva": 10,
           "name": "Xiuxo de Crema",
           "brand": "Viladrau Bakery",
           "category": "REDUCED",
@@ -50,7 +36,6 @@
           "price": 5.5
         },
         {
-          "iva": 5,
           "name": "Billet de Tram",
           "brand": "Viladrau Mobility",
           "category": "SUPER_REDUCED",
@@ -59,7 +44,6 @@
           "price": 2.25
         },
         {
-          "iva": 10,
           "name": "dfg",
           "brand": "Dfg",
           "category": "REDUCED",
