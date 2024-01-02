@@ -17,6 +17,6 @@ public class General extends Product {
     }
     @Override
     public float applyIVA(float price) {
-        return (float) (price*(getIva()/100.0));
+        return (float) (price + (price*(getIva()/100.0)));
     }
 }

@@ -657,6 +657,7 @@ public class Controller {
                 ArrayList<String> products = cartManager.getCartProds();
                 for (String product: products){
                     if (shopManager.getProdFromCat(shop).contains(product)) {
+                        //price = cartManager.getProductInShop().getPrice();
                         //ingresos nets per a la botiga
                         price = cartManager.calculateTaxes(shop, i);
                         totalPrice = totalPrice + price;

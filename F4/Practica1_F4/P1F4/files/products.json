@@ -1,84 +1,49 @@
 [
   {
-    "iva": 10,
-    "name": "qwe",
-    "brand": "Qwe",
-    "category": "REDUCED",
-    "maxPrice": 35.0,
+    "name": "prodcut1",
+    "brand": "Brand1",
+    "category": "GENERAL",
+    "maxPrice": 121.0,
     "rating": [],
     "price": 0.0
   },
   {
-    "name": "poi",
-    "brand": "Poi",
+    "name": "product2",
+    "brand": "Brand2",
+    "category": "REDUCED",
+    "maxPrice": 110.0,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "name": "product3",
+    "brand": "Brand3",
     "category": "SUPER_REDUCED",
-    "maxPrice": 4.0,
-    "rating": [
-      "4* ok",
-      "3* yes"
-    ],
-    "price": 0.0
-  },
-  {
-    "name": "asd",
-    "brand": "Asd",
-    "category": "GENERAL",
-    "maxPrice": 35.0,
+    "maxPrice": 104.0,
     "rating": [],
     "price": 0.0
   },
   {
-    "name": "GTA VI",
-    "brand": "Viladrau Games",
+    "name": "1",
+    "brand": "1",
     "category": "GENERAL",
-    "maxPrice": 79.99,
+    "maxPrice": 96.787895,
     "rating": [],
     "price": 0.0
   },
   {
-    "iva": 10,
-    "name": "Xiuxo de Crema",
-    "brand": "Viladrau Bakery",
+    "name": "2",
+    "brand": "2",
     "category": "REDUCED",
-    "maxPrice": 5.5,
-    "rating": [
-      "3* ok"
-    ],
+    "maxPrice": 6.05,
+    "rating": [],
     "price": 0.0
   },
   {
-    "name": "Billet de Tram",
-    "brand": "Viladrau Mobility",
+    "name": "3",
+    "brand": "3",
     "category": "SUPER_REDUCED",
-    "maxPrice": 2.25,
-    "rating": [],
-    "price": 0.0
-  },
-  {
-    "iva": 10,
-    "name": "dfg",
-    "brand": "Dfg",
-    "category": "REDUCED",
-    "maxPrice": 12.0,
-    "rating": [
-      "3* dfg"
-    ],
-    "price": 0.0
-  },
-  {
-    "name": "jhgjghjghjghjghj",
-    "brand": "Detjyedsrtyhjb Rs",
-    "category": "GENERAL",
-    "maxPrice": 12.0,
-    "rating": [],
-    "price": 0.0
-  },
-  {
-    "iva": 10,
-    "name": "tuyerwq",
-    "brand": "Hyerteg",
-    "category": "REDUCED",
-    "maxPrice": 13.0,
+    "maxPrice": 2.34,
     "rating": [],
     "price": 0.0
   }

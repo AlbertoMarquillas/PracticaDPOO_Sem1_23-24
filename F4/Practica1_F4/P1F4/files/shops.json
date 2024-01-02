@@ -55,5 +55,40 @@
         }
       ]
     }
+  },
+  {
+    "name": "q",
+    "description": "q",
+    "since": 1234,
+    "earnings": 105.177895,
+    "businessModelObject": {},
+    "productCatalog": {
+      "products": [
+        {
+          "name": "1",
+          "brand": "1",
+          "category": "GENERAL",
+          "maxPrice": 96.787895,
+          "rating": [],
+          "price": 96.787895
+        },
+        {
+          "name": "2",
+          "brand": "2",
+          "category": "REDUCED",
+          "maxPrice": 6.05,
+          "rating": [],
+          "price": 6.05
+        },
+        {
+          "name": "3",
+          "brand": "3",
+          "category": "SUPER_REDUCED",
+          "maxPrice": 2.34,
+          "rating": [],
+          "price": 2.34
+        }
+      ]
+    }
   }
 ]

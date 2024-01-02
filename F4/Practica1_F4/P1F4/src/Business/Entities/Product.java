@@ -96,6 +96,10 @@ public abstract class Product {
         return maxPrice;
     }
 
+    public void setMaxPrice(float maxPrice) {
+        this.maxPrice = maxPrice;
+    }
+
     /**
      * Establece el precio de un producto.
      *
@@ -122,5 +126,15 @@ public abstract class Product {
         return category;
     }
     public abstract float applyIVA(float price);
+
+    public abstract int getIva();
+
+    public float originalPrice(float price) {
+        int a = getIva();
+        float op1 = (1 + (a/100));
+        float op2 = (price/op1);
+        float finalPrice = op2;
+        return finalPrice;
+    }
 }
 

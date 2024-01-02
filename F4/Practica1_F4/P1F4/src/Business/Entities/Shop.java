@@ -157,4 +157,7 @@ public class Shop {
         return businessModelObject;
     }
 
+    public float applyModel(float price) {
+        return businessModelObject.descompte(price);
+    }
 }

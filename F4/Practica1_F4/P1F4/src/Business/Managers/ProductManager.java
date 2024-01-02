@@ -64,10 +64,23 @@ public class ProductManager {
 
         Product product = null;
 
+
         switch (category) {
-            case "GENERAL" -> product = new General(name, brand, category, maxPrice, string);
-            case "REDUCED" -> product = new Reduced(name, brand, category, maxPrice, string);
-            case "SUPER_REDUCED" -> product = new SuperReduced(name, brand, category, maxPrice, string);
+            case "GENERAL" -> {
+                product = new General(name, brand, category, maxPrice, string);
+                maxPrice = ((General) product).applyIVA(maxPrice);
+                product.setMaxPrice(maxPrice);
+            }
+            case "REDUCED" -> {
+                product = new Reduced(name, brand, category, maxPrice, string);
+                maxPrice = ((Reduced) product).applyIVA(maxPrice);
+                product.setMaxPrice(maxPrice);
+            }
+            case "SUPER_REDUCED" -> {
+                product = new SuperReduced(name, brand, category, maxPrice, string);
+                maxPrice = ((SuperReduced) product).applyIVA(maxPrice);
+                product.setMaxPrice(maxPrice);
+            }
         }
 
         try {

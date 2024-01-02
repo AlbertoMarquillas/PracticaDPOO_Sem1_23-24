@@ -21,10 +21,10 @@ public class Reduced extends Product {
     }
     @Override
     public float applyIVA(float price) {
-        return (float) (price*(getIva()/100.0));
+        return (float) ( price + (price*(getIva()/100.0)));
     }
 
     public float applyRatingIVA(Float price) {
-        return (float) (price*(getReducedIva()/100.0));
+        return (float) (price - (price*(getReducedIva()/100.0)));
     }
 }

@@ -2,6 +2,7 @@ package Business.Managers;
 
 import Business.Entities.HerenciasProduct.General;
 import Business.Entities.HerenciasProduct.Reduced;
+import Business.Entities.HerenciasProduct.SuperReduced;
 import Business.Entities.HerenciasShop.Loyalty;
 import Business.Entities.HerenciasShop.MaxProfit;
 import Business.Entities.HerenciasShop.Sponsored;
@@ -43,6 +44,8 @@ public class ProductCatalogManager {
         ProductCatalog productCatalog = shopManager.getProductCatalog(shop);
 
         Product prod = productManager.productFromString(product);
+
+        productPrice = prod.applyIVA(productPrice);
 
         prod.setPrice(productPrice);
 

@@ -137,11 +137,8 @@ public class CartManager {
                     }
 
                     if(Float.parseFloat(String.valueOf(totalRating)) >= 3.5){
-                        price = price - ((Reduced)product).applyRatingIVA(price);
+                        price = ((Reduced)product).applyRatingIVA(price);
                         product.setPrice(price);
-                        System.out.println("Hola");
-                    } else {
-                        System.out.println("Adios");
                     }
                 }
                 case "SUPER_REDUCED" -> {
@@ -246,11 +243,14 @@ public class CartManager {
 
         if(cartItem.getShop().getName().equalsIgnoreCase(shop)) {
             float price = cartItem.getProduct().getPrice();
-            //prodPrice = price - cartItem.getProduct().applyModel();
-
+            prodPrice = originalPrice(price, cartItem);
         }
         return prodPrice;
 
+    }
+
+    private float originalPrice(float price, CartItem cartItem) {
+        return cartItem.getProduct().originalPrice(price);
     }
 
     public ArrayList<String> getCantidades() {
@@ -268,5 +268,21 @@ public class CartManager {
 
 
         return cantidades;
+    }
+
+    public Product getProductInShop(String shop) {
+        ArrayList<String> shops = new ArrayList<>();
+        ArrayList <CartItem> cartItems = cart.getCartItems();
+
+        for (CartItem cartItem: cartItems){
+            shops.add(cartItem.getShop().getName());
+        }
+
+        for (String shop1: shops){
+            if (shop1.equalsIgnoreCase(shop)){
+
+            }
+        }
+        return null;
     }
 }
