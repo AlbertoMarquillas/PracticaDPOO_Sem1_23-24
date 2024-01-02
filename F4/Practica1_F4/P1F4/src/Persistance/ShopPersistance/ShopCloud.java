@@ -52,7 +52,6 @@ public class ShopCloud implements ShopDAO{
 
             String string = api.getFromUrl(pathString);
             JsonElement element = JsonParser.parseString(string);
-            array = element.getAsJsonArray();
 
             if (element.isJsonArray()) {
                 array = element.getAsJsonArray();

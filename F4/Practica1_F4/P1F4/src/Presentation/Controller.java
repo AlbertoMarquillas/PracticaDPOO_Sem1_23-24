@@ -371,7 +371,7 @@ public class Controller {
     /**
      * Realiza búsquedas de productos
      */
-    public void searchProducts() it{
+    public void searchProducts() {
 
         int i = 0;
         boolean printed = false;
@@ -609,7 +609,7 @@ public class Controller {
 
             switch (option) {
                 case 1:
-                    checkout(shops, prices);
+                    checkout(shops);
                     break;
                 case 2:
                     clearCart();
@@ -642,9 +642,9 @@ public class Controller {
      * Gestiona terminar una compra.
      *
      * @param shops ArrayList de strings con el nombre de las tiendas de todos los productos del carrito.
-     * @param prices ArrayList de floats con el precio de todos los productos del carrito.
+     *
      */
-    public void checkout(ArrayList<String> shops, ArrayList<Float> prices) {
+    public void checkout(ArrayList<String> shops) {
         view.spacing();
         String confirm = view.confirmCart();
         view.spacing();
