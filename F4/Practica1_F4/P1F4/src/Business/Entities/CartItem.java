@@ -11,18 +11,11 @@ public class CartItem {
     private Shop shop;
     private int cantidad;
 
-    public CartItem(Product product, Shop shop, int cantidad) {
-        this.product = product;
-        this.shop = shop;
-        this.cantidad = cantidad;
-    }
-
     public CartItem() {
         this.product = null;
         this.shop = null;
         this.cantidad = 0;
     }
-
 
     public Product getProduct() {
         return product;

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Reduced extends Product {
 
-
     public Reduced(String name, String brand, String category, float maxPrice, ArrayList<String> rating) {
         super(name, brand, category, maxPrice, rating);
     }

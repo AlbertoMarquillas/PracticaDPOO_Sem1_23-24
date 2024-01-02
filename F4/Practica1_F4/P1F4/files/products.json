@@ -9,7 +9,6 @@
     "price": 0.0
   },
   {
-    "iva": 5,
     "name": "poi",
     "brand": "Poi",
     "category": "SUPER_REDUCED",
@@ -21,7 +20,6 @@
     "price": 0.0
   },
   {
-    "iva": 21,
     "name": "asd",
     "brand": "Asd",
     "category": "GENERAL",
@@ -30,7 +28,6 @@
     "price": 0.0
   },
   {
-    "iva": 21,
     "name": "GTA VI",
     "brand": "Viladrau Games",
     "category": "GENERAL",
@@ -50,7 +47,6 @@
     "price": 0.0
   },
   {
-    "iva": 5,
     "name": "Billet de Tram",
     "brand": "Viladrau Mobility",
     "category": "SUPER_REDUCED",
@@ -67,6 +63,23 @@
     "rating": [
       "3* dfg"
     ],
+    "price": 0.0
+  },
+  {
+    "name": "jhgjghjghjghjghj",
+    "brand": "Detjyedsrtyhjb Rs",
+    "category": "GENERAL",
+    "maxPrice": 12.0,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "iva": 10,
+    "name": "tuyerwq",
+    "brand": "Hyerteg",
+    "category": "REDUCED",
+    "maxPrice": 13.0,
+    "rating": [],
     "price": 0.0
   }
 ]
