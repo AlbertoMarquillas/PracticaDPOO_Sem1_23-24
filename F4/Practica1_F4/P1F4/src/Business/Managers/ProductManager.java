@@ -4,11 +4,13 @@ import Business.Entities.HerenciasProduct.General;
 import Business.Entities.HerenciasProduct.Reduced;
 import Business.Entities.HerenciasProduct.SuperReduced;
 import Business.Entities.Product;
+
 import Persistance.ProductPersistance.*;
 import edu.salle.url.api.exception.ApiException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 /**
@@ -28,7 +30,7 @@ public class ProductManager {
                 try {
                     this.productDAO = new ProductCloud();
                 } catch (ApiException e) {
-                    // Switch to JSON if API is not reachable
+
                     try {
                         this.productDAO = new ProductJSON();
                     } catch (FileNotFoundException ex) {

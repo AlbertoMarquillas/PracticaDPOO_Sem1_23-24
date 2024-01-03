@@ -3,21 +3,17 @@ package Persistance.ProductPersistance;
 import Business.Entities.HerenciasProduct.General;
 import Business.Entities.HerenciasProduct.Reduced;
 import Business.Entities.HerenciasProduct.SuperReduced;
-import Business.Entities.HerenciasShop.Loyalty;
-import Business.Entities.HerenciasShop.MaxProfit;
-import Business.Entities.HerenciasShop.Sponsored;
 import Business.Entities.Product;
+
 import com.google.gson.*;
 import edu.salle.url.api.ApiHelper;
 import edu.salle.url.api.exception.ApiException;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Writer;
-import java.nio.file.Files;
+
 import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.util.ArrayList;
 
 /**
