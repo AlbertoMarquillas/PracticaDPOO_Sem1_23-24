@@ -49,6 +49,9 @@ public abstract class Product {
         this.category = category;
         this.maxPrice = maxPrice;
         this.price = price;
+
+        setAllRating(rating);
+        
     }
 
     /**
@@ -115,6 +118,11 @@ public abstract class Product {
      * @param rating Puntuación del producto.
      */
     public void setAllRating(ArrayList<String> rating) {
+
+        if (this.rating == null) {
+            this.rating = new ArrayList<>();
+        }
+
         this.rating.clear();
         this.rating.addAll(rating);
     }
@@ -125,16 +133,11 @@ public abstract class Product {
     public String getCategory() {
         return category;
     }
+
     public abstract float applyIVA(float price);
 
     public abstract int getIva();
 
-    public float originalPrice(float price) {
-        int a = getIva();
-        float op1 = (1 + (a/100));
-        float op2 = (price/op1);
-        float finalPrice = op2;
-        return finalPrice;
-    }
+    public abstract float originalPrice(float price, float totalRating);
 }
 

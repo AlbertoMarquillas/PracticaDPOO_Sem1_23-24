@@ -1,35 +1,97 @@
 [
   {
-    "name": "qwe",
-    "description": "qwe",
-    "since": 123,
-    "earnings": 26.16462,
+    "name": "Big Shop of Horrors",
+    "description": "Description",
+    "since": 1960,
+    "earnings": 668.35455,
     "businessModelObject": {
-      "loyaltyThreshold": 35.0
+      "loyaltyThreshold": 420.24
     },
     "productCatalog": {
-      "products": []
+      "products": [
+        {
+          "name": "Cool Plant",
+          "brand": "Not An Alien",
+          "category": "GENERAL",
+          "maxPrice": 360.36,
+          "rating": [],
+          "price": 360.36
+        },
+        {
+          "name": "Bouquet of Roses",
+          "brand": "La Salle Gardening",
+          "category": "REDUCED",
+          "maxPrice": 79.99,
+          "rating": [],
+          "price": 79.99
+        },
+        {
+          "name": "How to Train Your Alien",
+          "brand": "Not An Alien",
+          "category": "SUPER_REDUCED",
+          "maxPrice": 25.0,
+          "rating": [],
+          "price": 25.0
+        }
+      ]
     }
   },
   {
-    "name": "a",
-    "description": "a",
-    "since": 12,
-    "earnings": 1489.8682,
+    "name": "The Invulnerable Vagrant",
+    "description": "Description",
+    "since": 835,
+    "earnings": 936.1093,
+    "businessModelObject": {
+      "sponsoringBrand": "Cereberus Assembly"
+    },
+    "productCatalog": {
+      "products": [
+        {
+          "name": "Simulacra Machine",
+          "brand": "Cereberus Assembly",
+          "category": "GENERAL",
+          "maxPrice": 1000.0,
+          "rating": [],
+          "price": 1000.0
+        },
+        {
+          "name": "Bag of Holding",
+          "brand": "Trevan Trinkets",
+          "category": "REDUCED",
+          "maxPrice": 500.0,
+          "rating": [],
+          "price": 500.0
+        },
+        {
+          "name": "Pearl of Power",
+          "brand": "Trevan Trinkets",
+          "category": "SUPER_REDUCED",
+          "maxPrice": 200.0,
+          "rating": [],
+          "price": 200.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "Queviures Groceries",
+    "description": "Description",
+    "since": 1999,
+    "earnings": 2763.1848,
     "businessModelObject": {},
     "productCatalog": {
       "products": [
         {
           "name": "GTA VI",
-          "brand": "Viladrau Games",
+          "brand": "Vildrau Games",
           "category": "GENERAL",
           "maxPrice": 79.99,
           "rating": [],
           "price": 79.99
         },
         {
-          "name": "Xiuxo de Crema",
-          "brand": "Viladrau Bakery",
+          "name": "Xuixo de Crema",
+          "brand": "Viladrau Bakery 5",
           "category": "REDUCED",
           "maxPrice": 5.5,
           "rating": [],
@@ -44,49 +106,24 @@
           "price": 2.25
         },
         {
-          "name": "dfg",
-          "brand": "Dfg",
+          "name": "a",
+          "brand": "a",
           "category": "REDUCED",
-          "maxPrice": 12.0,
+          "maxPrice": 200.0,
           "rating": [
-            "3* dfg"
+            "1* ok",
+            "5* ok",
+            "5* okok"
           ],
-          "price": 10.0
-        }
-      ]
-    }
-  },
-  {
-    "name": "q",
-    "description": "q",
-    "since": 1234,
-    "earnings": 105.177895,
-    "businessModelObject": {},
-    "productCatalog": {
-      "products": [
-        {
-          "name": "1",
-          "brand": "1",
-          "category": "GENERAL",
-          "maxPrice": 96.787895,
-          "rating": [],
-          "price": 96.787895
+          "price": 200.0
         },
         {
-          "name": "2",
-          "brand": "2",
-          "category": "REDUCED",
-          "maxPrice": 6.05,
-          "rating": [],
-          "price": 6.05
-        },
-        {
-          "name": "3",
-          "brand": "3",
+          "name": "b",
+          "brand": "B",
           "category": "SUPER_REDUCED",
-          "maxPrice": 2.34,
+          "maxPrice": 200.0,
           "rating": [],
-          "price": 2.34
+          "price": 200.0
         }
       ]
     }

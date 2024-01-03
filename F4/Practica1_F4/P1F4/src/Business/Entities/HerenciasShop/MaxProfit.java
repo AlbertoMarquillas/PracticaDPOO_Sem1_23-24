@@ -18,7 +18,7 @@ public class MaxProfit extends BusinessModel {
     }
 
     @Override
-    public float descompte(Float price) {
+    public float descompte(Float price, int iva) {
         return 0;
     }
 }

@@ -17,15 +17,21 @@ public class SuperReduced extends Product {
         return 4;
     }
 
+    @Override
+    public float originalPrice(float price, float totalRating) {
+        if (price > 100) {
+            return (float) ((price) / (1.0 + (getSuperReducedIva()/100.0)));
+        } else {
+            return (float) ((price) / (1.0 + (getIva()/100.0)));
+        }
+    }
+
+
     public int getSuperReducedIva() {
         return 0;
     }
 
     public float applyIVA(float price) {
-        return (float) (price+(price*(getIva()/100.0)));
+        return (float) ((price*(getIva()/100.0)));
     }
-    public float applySuperReducedIVA(float price) {
-        return (price - applyIVA(price));
-    }
-
 }

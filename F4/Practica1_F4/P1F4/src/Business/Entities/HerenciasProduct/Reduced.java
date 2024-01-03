@@ -16,6 +16,18 @@ public class Reduced extends Product {
     public int getIva() {
         return 10;
     }
+
+
+    @Override
+    public float originalPrice(float price, float totalRating) {
+
+        if (totalRating > 3.5) {
+            return (float) ((price) / (1.0 + (getReducedIva()/100.0)));
+        } else {
+            return (float) ((price) / (1.0 + (getIva()/100.0)));
+        }
+    }
+
     public int getReducedIva() {
         return 5;
     }
@@ -24,7 +36,4 @@ public class Reduced extends Product {
         return (float) ( price + (price*(getIva()/100.0)));
     }
 
-    public float applyRatingIVA(Float price) {
-        return (float) (price - (price*(getReducedIva()/100.0)));
-    }
 }

@@ -45,8 +45,6 @@ public class ProductCatalogManager {
 
         Product prod = productManager.productFromString(product);
 
-        productPrice = prod.applyIVA(productPrice);
-
         prod.setPrice(productPrice);
 
         productCatalog.addProduct(prod);

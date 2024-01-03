@@ -27,7 +27,8 @@ public class Loyalty extends BusinessModel {
     }
 
     @Override
-    public float descompte(Float price) {
-        return 0;
+    public float descompte(Float price, int iva) {
+
+        return (float) ((price/(1.0 + (iva/100.0))));
     }
 }

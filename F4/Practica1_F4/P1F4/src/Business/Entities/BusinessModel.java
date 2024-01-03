@@ -18,7 +18,7 @@ public abstract class BusinessModel {
 
     public abstract String getModel();
 
-    public abstract float descompte(Float price);
+    public abstract float descompte(Float price, int iva);
 
 
 }

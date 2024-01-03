@@ -1,49 +1,93 @@
 [
   {
-    "name": "prodcut1",
-    "brand": "Brand1",
+    "name": "GTA VI",
+    "brand": "Vildrau Games",
     "category": "GENERAL",
-    "maxPrice": 121.0,
+    "maxPrice": 79.99,
     "rating": [],
     "price": 0.0
   },
   {
-    "name": "product2",
-    "brand": "Brand2",
+    "name": "Xuixo de Crema",
+    "brand": "Viladrau Bakery 5",
     "category": "REDUCED",
-    "maxPrice": 110.0,
+    "maxPrice": 5.5,
     "rating": [],
     "price": 0.0
   },
   {
-    "name": "product3",
-    "brand": "Brand3",
+    "name": "Billet de Tram",
+    "brand": "Viladrau Mobility",
     "category": "SUPER_REDUCED",
-    "maxPrice": 104.0,
+    "maxPrice": 2.25,
     "rating": [],
     "price": 0.0
   },
   {
-    "name": "1",
-    "brand": "1",
+    "name": "Cool Plant",
+    "brand": "Not An Alien",
     "category": "GENERAL",
-    "maxPrice": 96.787895,
+    "maxPrice": 360.36,
     "rating": [],
     "price": 0.0
   },
   {
-    "name": "2",
-    "brand": "2",
+    "name": "Bouquet of Roses",
+    "brand": "La Salle Gardening",
     "category": "REDUCED",
-    "maxPrice": 6.05,
+    "maxPrice": 79.99,
     "rating": [],
     "price": 0.0
   },
   {
-    "name": "3",
-    "brand": "3",
+    "name": "How to Train Your Alien",
+    "brand": "Not An Alien",
     "category": "SUPER_REDUCED",
-    "maxPrice": 2.34,
+    "maxPrice": 25.0,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "name": "Simulacra Machine",
+    "brand": "Cereberus Assembly",
+    "category": "GENERAL",
+    "maxPrice": 1000.0,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "name": "Bag of Holding",
+    "brand": "Trevan Trinkets",
+    "category": "REDUCED",
+    "maxPrice": 500.0,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "name": "Pearl of Power",
+    "brand": "Trevan Trinkets",
+    "category": "SUPER_REDUCED",
+    "maxPrice": 200.0,
+    "rating": [],
+    "price": 0.0
+  },
+  {
+    "name": "a",
+    "brand": "a",
+    "category": "REDUCED",
+    "maxPrice": 200.0,
+    "rating": [
+      "1* ok",
+      "5* ok",
+      "5* okok"
+    ],
+    "price": 0.0
+  },
+  {
+    "name": "b",
+    "brand": "B",
+    "category": "SUPER_REDUCED",
+    "maxPrice": 200.0,
     "rating": [],
     "price": 0.0
   }

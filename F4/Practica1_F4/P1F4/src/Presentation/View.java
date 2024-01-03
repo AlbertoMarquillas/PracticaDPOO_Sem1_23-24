@@ -309,11 +309,11 @@ public class View {
      * Muestra la información del proceso de pago.
      *
      * @param shop     Nombre de la tienda.
-     * @param aFloat   Precio total de la compra.
+     * @param price   Precio total de la compra.
      * @param earnings Ganancias de la tienda.
      */
-    public void showCheckout(String shop, Float aFloat, float earnings) {
-        String PROD = "\"" + shop + "\" has earned " + aFloat + ", for an historic total of " + earnings + ".";
+    public void showCheckout(String shop, Float price, float earnings) {
+        String PROD = "\"" + shop + "\" has earned " + price + ", for an historic total of " + earnings + ".";
         showMessage(PROD);
     }
 
@@ -852,12 +852,10 @@ public class View {
         spacing();
     }
 
-    public void showProductCloudTrue() {
-        showMessage("\nCloud\n");
-    }
-
     public void showProductJSONTrue() {
-        showMessage("\nJSON\n");
+        String LOCAL = "Error: The API isn’t available.\n\n" +
+                        "Verifying local files...";
+        showMessage(LOCAL);
     }
 
     public float askForLoyaltyTreshold() {
@@ -868,6 +866,16 @@ public class View {
     public String askForSponsoringBrand() {
         String SPONSOR_BRAND = "Please enter the shop’s sponsoring brand: ";
         return askForString(SPONSOR_BRAND);
+    }
+
+    public void showCheckStartus() {
+        String STATUS = "Checking API status...";
+        showMessage(STATUS);
+    }
+
+    public void showProductFalse() {
+        String ERROR = "Error: The products.json file can’t be accessed.\n\nShutting down...";
+        showMessage(ERROR);
     }
 }
 

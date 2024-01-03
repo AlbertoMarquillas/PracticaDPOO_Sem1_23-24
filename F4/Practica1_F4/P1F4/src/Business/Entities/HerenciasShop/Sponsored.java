@@ -27,7 +27,7 @@ public class Sponsored extends BusinessModel {
     }
 
     @Override
-    public float descompte(Float price) {
-        return (float)(price - price * (1/10));
+    public float descompte(Float price, int iva) {
+        return (float)(price - price * (1.0/10.0));
     }
 }

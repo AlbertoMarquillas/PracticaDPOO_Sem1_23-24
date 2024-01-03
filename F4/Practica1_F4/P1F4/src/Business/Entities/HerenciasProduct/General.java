@@ -15,8 +15,15 @@ public class General extends Product {
     public int getIva() {
         return 21;
     }
+
+
+    @Override
+    public float originalPrice(float price, float totalRating) {
+        return (float) ((price) / (1.0 + (getIva()/100.0)));
+    }
+
     @Override
     public float applyIVA(float price) {
-        return (float) (price + (price*(getIva()/100.0)));
+        return (float) (price - (price * ((float)getIva()/100.0)));
     }
 }

@@ -24,8 +24,11 @@ public class Controller {
     private ProductCatalogManager productCatalogManager;
     private CartManager cartManager;
 
+    float thresholdLoyalty = 0;
+
     static final int CLOUD = 0;
     static final int JSON = 1;
+    static final int ERROR = -1;
 
     /**
      * Constructor de la clase Controller.
@@ -43,25 +46,19 @@ public class Controller {
 
         int option = 0;
 
-        /*
 
-        SI QUEREMOS BORRAR TODAS LAS TIENDAS
-
-
-
-
-        try {
+        /*try {
             ApiHelper apiHelper = new ApiHelper();
             String pathString = "https://balandrau.salle.url.edu/dpoo/P1-G109/shops";
             String pathString2 = "https://balandrau.salle.url.edu/dpoo/P1-G109/products";
 
-            //apiHelper.deleteFromUrl(pathString);
-            //apiHelper.deleteFromUrl(pathString2);
+            apiHelper.deleteFromUrl(pathString);
+            apiHelper.deleteFromUrl(pathString2);
 
         } catch (ApiException e) {
             throw new RuntimeException(e);
-        }
-        */
+        }*/
+
 
         startProgram();
         int data = checkProgram();
@@ -85,7 +82,10 @@ public class Controller {
                     case 3 -> searchProducts();
                     case 4 -> listShops();
                     case 5 -> yourCart();
-                    case 6 -> view.showExit();
+                    case 6 ->{
+                        view.showExit();
+                        thresholdLoyalty = 0;
+                    }
 
                     default -> view.showWrongOption(1, 6);
                 }
@@ -98,17 +98,23 @@ public class Controller {
     public void startProgram() {
         view.showTitle();
         view.showWelcome();
-        view.showVerififyingJson();
     }
 
     private int checkProgram() {
-        this.productManager = new ProductManager(0);
+        this.productManager = new ProductManager(CLOUD);
+
+        view.showCheckStartus();
+
         if (productManager.isUsingCloud()) {
-            view.showProductCloudTrue();
             return CLOUD;
         } else {
             view.showProductJSONTrue();
-            return JSON;
+            if (productManager.isUsingLocal()) {
+                return JSON;
+            }else {
+                view.showProductFalse();
+            }
+            return ERROR;
         }
     }
 
@@ -568,9 +574,7 @@ public class Controller {
      */
     public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor, ArrayList<String> reviews) {
 
-        float totalPrice = 0;
-        //No se aplica la category del producto pero si el modelo de la tienda aqui
-        cartManager.addToCart(productName, brand, shopName, price, category, fundationYear, descr, earnings, businessModel, loyaltyThres, sponsor, reviews);
+        cartManager.addToCart(productName, brand, shopName, price, category, fundationYear, descr, earnings, businessModel, loyaltyThres, sponsor, reviews, thresholdLoyalty);
 
         view.spacing();
         view.showAddToCart(productName, brand);
@@ -647,39 +651,49 @@ public class Controller {
         view.spacing();
         String confirm = view.confirmCart();
         view.spacing();
-        float earnings = 0;
-        float price = 0;
-        float totalPrice = 0;
+
         if (cartManager.confirmOK(confirm)) {
-            int i = 0;
-            for (String shop: shops) {
 
-                ArrayList<String> products = cartManager.getCartProds();
-                for (String product: products){
-                    if (shopManager.getProdFromCat(shop).contains(product)) {
-                        //price = cartManager.getProductInShop().getPrice();
-                        //ingresos nets per a la botiga
-                        price = cartManager.calculateTaxes(shop, i);
-                        totalPrice = totalPrice + price;
-                        earnings = shopManager.getEarnings(shop) + price;
-                        shopManager.updateEarnings(earnings, shop);
-                        i++;
-                    }
-
-                }
-
-                view.showCheckout(shop, totalPrice, shopManager.getEarnings(shop));
-
-                if (i == shops.size()){
-                    break;
-                }
-            }
+            calculTaxes(shops);
 
             view.spacing();
             if (cartManager.emptyCart()) {
                 view.showEndShopping();
                 view.spacing();
             }
+        }
+    }
+    private void calculTaxes(ArrayList<String> shops){
+        float price = 0;
+        float thres = 0;
+        float earnings;
+        int i = 0;
+
+
+        for (String shop: shops) {
+            ArrayList<String> products = cartManager.getCartProds();
+            for (String product: products){
+                if (shopManager.getProdFromCat(shop).contains(product)) {
+
+                        float prodPrice = cartManager.getPriceProd(shop, product);
+
+                        price = cartManager.calculateTaxes(shop, i);
+                        thres = thres + price;
+                        earnings = shopManager.getEarnings(shop) + price;
+                        shopManager.updateEarnings(earnings, shop);
+                        i++;
+                        if (cartManager.isLoyality(shop)){
+                            thresholdLoyalty = thresholdLoyalty + prodPrice;
+                        }
+                }
+            }
+
+            view.showCheckout(shop, thres, shopManager.getEarnings(shop));
+
+            if (i == shops.size()){
+                break;
+            }
+            thres = 0;
         }
     }
 

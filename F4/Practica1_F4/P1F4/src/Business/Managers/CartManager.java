@@ -6,6 +6,7 @@ import Business.Entities.HerenciasProduct.General;
 import Business.Entities.HerenciasProduct.Reduced;
 import Business.Entities.HerenciasProduct.SuperReduced;
 import Business.Entities.HerenciasShop.Loyalty;
+import Business.Entities.HerenciasShop.Sponsored;
 import Business.Entities.Product;
 import Business.Entities.Shop;
 
@@ -43,32 +44,11 @@ public class CartManager {
     public float sumTotalPrice() {
 
         float totalPrice = 0;
-        float prodPrice = 0;
         ArrayList<CartItem> cartItems = cart.getCartItems();
-
-        boolean sponsored = false;
 
         for(CartItem cartItem: cartItems){
 
-            if (cartItem.getShop().getBusinessModel().getModel().equalsIgnoreCase("LOYALTY")) {
-                if (totalPrice >= ((Loyalty) cartItem.getShop().getBusinessModel()).getLoyaltyThreshold()) {
-                    prodPrice = cartItem.getProduct().applyIVA(cartItem.getProduct().getPrice());
-                } else {
-                    prodPrice = cartItem.getProduct().getPrice();
-                }
-
-            } else if (cartItem.getShop().getBusinessModel().getModel().equalsIgnoreCase("SPONSORED")){
-                sponsored = true;
-                prodPrice = cartItem.getProduct().getPrice();
-            }
-            else {
-                prodPrice = cartItem.getProduct().getPrice();
-            }
-
-            totalPrice = totalPrice + prodPrice;
-        }
-        if (sponsored) {
-            totalPrice = totalPrice / 10;
+            totalPrice = totalPrice + cartItem.getProduct().getPrice();;
         }
 
         return totalPrice;
@@ -98,7 +78,7 @@ public class CartManager {
      * @param reviews
      * @return
      */
-    public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor, ArrayList<String> reviews) {
+    public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor, ArrayList<String> reviews, float thresholdLoyalty) {
 
         boolean added = false;
 
@@ -119,41 +99,37 @@ public class CartManager {
 
             switch (category) {
                 case "GENERAL" -> product = new General(productName, brand, category, 0, reviews, price);
-                case "REDUCED" -> {
-                    product = new Reduced(productName, brand, category, 0, reviews, price);
-                    int cantidad = 0;
-                    int totalRating = 0;
-                    if (reviews.size() > 0) {
-                        for (String rating: reviews) {
-                            totalRating = totalRating + rating.charAt(0);
-                            cantidad++;
 
-                        }
-                        if (cantidad > 0){
-                            totalRating = totalRating/cantidad;
-                        } else {
-                            totalRating = 0;
-                        }
-                    }
+                case "REDUCED" -> product = new Reduced(productName, brand, category, 0, reviews, price);
 
-                    if(Float.parseFloat(String.valueOf(totalRating)) >= 3.5){
-                        price = ((Reduced)product).applyRatingIVA(price);
-                        product.setPrice(price);
-                    }
-                }
-                case "SUPER_REDUCED" -> {
-                    product = new SuperReduced(productName, brand, category, 0, null, price);
-                    if (price >= 100.0) {
-                        price = ((SuperReduced) product).applySuperReducedIVA(price);
-                        product.setPrice(price);
-                    }
-                }
+                case "SUPER_REDUCED" -> product = new SuperReduced(productName, brand, category, 0, reviews, price);
             }
+            cartItem.setProduct(product);
             switch (businessModel) {
                 case "MAX_PROFIT" -> shop = new Shop(shopName,descr, fundationYear, businessModel, 0, null);
-                case "LOYALTY" -> shop = new Shop(shopName,descr, fundationYear, businessModel, loyaltyThres, null);
-                case "SPONSORED" -> shop = new Shop(shopName,descr, fundationYear, businessModel, 0,sponsor);
+                case "LOYALTY" -> {
+                    shop = new Shop(shopName,descr, fundationYear, businessModel, loyaltyThres, null);
+
+                    if (thresholdLoyalty > loyaltyThres) {
+
+                        //aplicar descompte
+
+                        price = shop.descompte(price, cartItem.getProduct().getIva());
+                        product.setPrice(price);
+
+                    }
+
+                }
+                case "SPONSORED" -> {
+                    shop = new Shop(shopName,descr, fundationYear, businessModel, 0,sponsor);
+                    if (product.getBrand().equalsIgnoreCase(sponsor)){
+                        price = shop.applyModel(price);
+                        product.setPrice(price);
+                    }
+                }
+
             }
+
             cartItem.setProduct(product);
             cartItem.setShop(shop);
             cartItem.setCantidad(cartItem.getCantidad()+1);
@@ -242,15 +218,42 @@ public class CartManager {
         CartItem cartItem = cart.getCartItems().get(i);
 
         if(cartItem.getShop().getName().equalsIgnoreCase(shop)) {
-            float price = cartItem.getProduct().getPrice();
-            prodPrice = originalPrice(price, cartItem);
+            float price1 = cartItem.getProduct().getPrice();
+            prodPrice = originalPrice(price1, cartItem);
         }
+
         return prodPrice;
 
     }
 
     private float originalPrice(float price, CartItem cartItem) {
-        return cartItem.getProduct().originalPrice(price);
+        float totalRating = 0.0F;
+        if (cartItem.getProduct().getCategory().equalsIgnoreCase("REDUCED")){
+
+            ArrayList<String> reviews = cartItem.getProduct().getRating();
+
+            float cantidad = 0.0F;
+
+            if (reviews != null) {
+                if (reviews.size() > 0) {
+                    for (String rating: reviews) {
+                        totalRating = totalRating + Float.parseFloat(String.valueOf(rating.charAt(0)));
+                        cantidad++;
+
+                    }
+                    if (cantidad > 0){
+                        totalRating = totalRating/cantidad;
+                    } else {
+                        totalRating = 0;
+                    }
+                }
+            }
+
+
+        }
+        return cartItem.getProduct().originalPrice(price, totalRating);
+
+
     }
 
     public ArrayList<String> getCantidades() {
@@ -284,5 +287,51 @@ public class CartManager {
             }
         }
         return null;
+    }
+
+    public boolean isLoyality(String shop) {
+
+        ArrayList<CartItem> cartItems = cart.getCartItems();
+
+        for (CartItem cartItem : cartItems) {
+            if (cartItem.getShop().getName().equalsIgnoreCase(shop)) {
+
+                if (cartItem.getShop().getBusinessModel().getModel().equalsIgnoreCase("LOYALTY")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean priceThreshold(String shop, float thresholdLoyalty) {
+
+
+        ArrayList<CartItem> cartItems = cart.getCartItems();
+
+        for (CartItem cartItem : cartItems) {
+            if (cartItem.getShop().getName().equalsIgnoreCase(shop) && cartItem.getShop().getBusinessModel().getModel().equalsIgnoreCase("LOYALTY")) {
+
+                if (thresholdLoyalty >  ((Loyalty)cartItem.getShop().getBusinessModel()).getLoyaltyThreshold()){
+                    return true;
+                }
+
+            }
+        }
+        return false;
+
+    }
+
+    public float getPriceProd(String shop, String product) {
+        ArrayList<CartItem> cartItems = cart.getCartItems();
+
+        for (CartItem cartItem : cartItems) {
+            if (cartItem.getShop().getName().equalsIgnoreCase(shop)){
+                if (cartItem.getProduct().getName().equalsIgnoreCase(product)){
+                    return cartItem.getProduct().getPrice();
+                }
+            }
+        }
+        return 0;
     }
 }

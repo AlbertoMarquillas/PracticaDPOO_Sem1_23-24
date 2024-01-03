@@ -404,17 +404,6 @@ public class ShopManager {
         }
     }
 
-    public float descompte(String shop, Float price) {
-        ArrayList<Shop> shops = readAll();
-
-        for(Shop sh: shops) {
-            if (sh.getName().equalsIgnoreCase(shop)) {
-                return sh.descompte(price);
-            }
-        }
-        return 0;
-    }
-
     public ArrayList<String> getCatFromCat(String shopName) {
         ArrayList<Shop> shops = readAll();
         ArrayList<String> categories = new ArrayList<>();

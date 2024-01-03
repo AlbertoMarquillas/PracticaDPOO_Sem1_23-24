@@ -145,8 +145,8 @@ public class Shop {
     }
 
 
-    public float descompte(Float price){
-        return businessModelObject.descompte(price);
+    public float descompte(Float price, int iva){
+        return businessModelObject.descompte(price, iva);
     }
 
     public void setBusinessModel(BusinessModel businessModel) {
@@ -158,6 +158,6 @@ public class Shop {
     }
 
     public float applyModel(float price) {
-        return businessModelObject.descompte(price);
+        return businessModelObject.descompte(price, 0);
     }
 }
