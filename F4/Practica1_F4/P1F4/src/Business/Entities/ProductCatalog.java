@@ -8,27 +8,24 @@ import java.util.ArrayList;
  */
 public class ProductCatalog {
 
-    // Lista que contiene los productos en el catálogo.
     private ArrayList<Product> products;
 
     /**
-     * Constructor de la clase ProductCatalog.
+     * Constructor de la clase ProductCatalog que inicializa un catálogo con una lista de productos vacia.
+     *
      */
     public ProductCatalog() {
         // Inicializar la lista de productos en el catálogo.
         this.products = new ArrayList<>();
     }
     /**
-     * Constructor de la clase ProductCatalog.
+     * Constructor de la clase ProductCatalog que inicializa un catálogo con una lista de productos dada.
      * @param products ArrayList de productos para inicializar el catálogo.
      */
     public ProductCatalog(ArrayList<Product> products) {
         // Inicializar la lista de productos en el catálogo.
         this.products = products;
     }
-
-
-    // Otros métodos relacionados con la composición
 
     /**
      * Agrega un producto al catálogo.
@@ -44,16 +41,15 @@ public class ProductCatalog {
      * Elimina un producto del catálogo.
      *
      * @param product Producto que se eliminará del catálogo.
-     * @param i posicion del producto
+     * @param i posición del producto en la lista.
      *
-     * @return un boolean que representa si se ha eliminado el producto
+     * @return true si el producto se eliminó correctamente, false en caso contrario.
      */
     public boolean removeProduct(Product product, int i) {
 
         this.products.remove(i);
         return this.products.contains(product);
     }
-
 
     /**
      * Lista los productos actualmente en el catálogo.
@@ -67,7 +63,7 @@ public class ProductCatalog {
     /**
      * Convierte los nombres de los productos en un ArrayList de Strings.
      *
-     * @return prods Un array list de strings con los nombres de los productos.
+     * @return Un ArrayList de strings con los nombres de los productos en el catálogo.
      */
     public ArrayList<String> toArrayString() {
         ArrayList<String> prods = new ArrayList<>();
@@ -80,7 +76,7 @@ public class ProductCatalog {
     /**
      * Convierte las marcas de los productos en un ArrayList de Strings.
      *
-     * @return Un array list de strings con las marcas de los productos.
+     * @return Un ArrayList de strings con las marcas de los productos en el catálogo.
      */
     public ArrayList<String> toArrayStringBrand() {
         ArrayList<String> brands = new ArrayList<>();
@@ -91,12 +87,12 @@ public class ProductCatalog {
     }
 
     /**
-     * Busca el precio de un producto del catálogo de productos enviado.
+     * Busca el precio de un producto en el catálogo.
      *
-     * @param prod El nombre del producto del que buscamos el precio.
-     * @param productCatalog El catálogo donde buscaremos el producto y su precio.
+     * @param prod El nombre del producto del que se busca el precio.
+     * @param productCatalog El catálogo de productos en el que se busca el producto y su precio.
      *
-     * @return El precio del producto.
+     * @return El precio del producto o 0 si no se encuentra.
      */
     public float searchForProductPrice(String prod, ProductCatalog productCatalog) {
 
@@ -128,6 +124,12 @@ public class ProductCatalog {
         return prices;
     }
 
+    /**
+     * Obtiene el rating de un producto por su nombre.
+     *
+     * @param prodName El nombre del producto del que se busca el rating.
+     * @return Un ArrayList de Strings que representa el rating del producto o una lista vacía si no se encuentra.
+     */
     public ArrayList<String> getProductRating(String prodName) {
         ArrayList<Product> products = listProducts();
         ArrayList<String> ratings = new ArrayList<>();
@@ -140,9 +142,14 @@ public class ProductCatalog {
         return ratings;
     }
 
+    /**
+     * Establece el rating de un producto por su nombre.
+     *
+     * @param prod El nombre del producto al que se le establecerá el rating.
+     * @param finalRating El rating que se establecerá.
+     */
     public void setProductRating(String prod, String finalRating) {
         ArrayList<Product> products = listProducts();
-        ArrayList<String> ratings = new ArrayList<>();
 
         for (Product product: products)  {
             if (product.getName().equalsIgnoreCase(prod)) {

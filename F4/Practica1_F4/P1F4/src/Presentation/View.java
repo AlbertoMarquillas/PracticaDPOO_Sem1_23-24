@@ -56,6 +56,7 @@ public class View {
             }
         }
     }
+
     /**
      * Solicita al usuario que ingrese un número decimal (float) mediante un mensaje y espera la entrada del usuario.
      * Si el usuario ingresa un valor no válido, se mostrará un mensaje de error y se le pedirá que lo intente nuevamente.
@@ -317,7 +318,6 @@ public class View {
         showMessage(PROD);
     }
 
-
     /**
      * Muestra el menú de operaciones relacionadas con productos en la consola.
      */
@@ -353,15 +353,6 @@ public class View {
     public int showCatalogMenu() {
         String C_MENU = "\t1) Read Reviews\n\t2) Review Product\n\t3) Add to Cart\n\nChoose an option: ";
         return askForInteger(C_MENU);
-    }
-
-    /**
-     * Muestra un mensaje indicando la verificación del archivo JSON.
-     */
-    public void showVerififyingJson() {
-        String VERIFY = "Verifying local files...";
-        showMessage(VERIFY);
-
     }
 
     /**
@@ -835,6 +826,7 @@ public class View {
         String NO_REV = "There are no reviews for this product.\n";
         showMessage(NO_REV);
     }
+
     /**
      * Mensaje informativo sobre que no hay productosen una tienda.
      */
@@ -842,6 +834,7 @@ public class View {
         String NO_PROD = "There are no products";
         showMessage(NO_PROD);
     }
+
     /**
      * Muestra un mensaje indicando que el producto no existe.
      */
@@ -852,27 +845,52 @@ public class View {
         spacing();
     }
 
+    /**
+     * Muestra un mensaje de error cuando la API no está disponible y
+     * verifica los archivos locales.
+     */
     public void showProductJSONTrue() {
-        String LOCAL = "Error: The API isn’t available.\n\n" +
-                        "Verifying local files...";
+        String LOCAL = """
+                Error: The API isn’t available.
+
+                Verifying local files...""";
         showMessage(LOCAL);
     }
 
+    /**
+     * Solicita al usuario que ingrese el umbral de lealtad de la tienda y
+     * devuelve el valor como un número decimal de punto flotante.
+     *
+     * @return El umbral de lealtad de la tienda ingresado por el usuario.
+     */
     public float askForLoyaltyTreshold() {
         String LOYALTY_THRES = "Please enter the shop’s loyalty threshold: ";
         return askForFloat(LOYALTY_THRES);
     }
 
+    /**
+     * Solicita al usuario que ingrese la marca patrocinadora de la tienda y
+     * devuelve la marca ingresada como una cadena de caracteres.
+     *
+     * @return La marca patrocinadora de la tienda ingresada por el usuario.
+     */
     public String askForSponsoringBrand() {
         String SPONSOR_BRAND = "Please enter the shop’s sponsoring brand: ";
         return askForString(SPONSOR_BRAND);
     }
 
-    public void showCheckStartus() {
+    /**
+     * Muestra un mensaje indicando que se está verificando el estado de la API.
+     */
+    public void showCheckStatus() {
         String STATUS = "Checking API status...";
         showMessage(STATUS);
     }
 
+    /**
+     * Muestra un mensaje de error cuando no se puede acceder al archivo products.json
+     * y realiza un apagado del sistema.
+     */
     public void showProductFalse() {
         String ERROR = "Error: The products.json file can’t be accessed.\n\nShutting down...";
         showMessage(ERROR);

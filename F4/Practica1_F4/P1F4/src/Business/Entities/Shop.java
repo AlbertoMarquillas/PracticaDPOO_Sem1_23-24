@@ -18,7 +18,16 @@ public class Shop {
     private BusinessModel businessModelObject;
     private ProductCatalog productCatalog;
 
-
+    /**
+     * Constructor de la clase Shop.
+     *
+     * @param name             Nombre de la tienda.
+     * @param description      Descripción de la tienda.
+     * @param since            Año de fundación de la tienda.
+     * @param earnings         Ganancias de la tienda.
+     * @param businessModel    Modelo de negocio de la tienda.
+     * @param productCatalog         Catálogo de productos de la tienda.
+     */
     public Shop(String name, String description, int since, float earnings, BusinessModel businessModel, ProductCatalog productCatalog) {
         this.name = name;
         this.description = description;
@@ -35,10 +44,9 @@ public class Shop {
      * @param description      Descripción de la tienda.
      * @param foundationYear   Año de fundación de la tienda.
      * @param businessModel    Modelo de negocio de la tienda.
-     * @param loyaltyThreshold
-     * @param sponsoringBrand
+     * @param loyaltyThreshold Umbral de lealtad (solo si el modelo es "LOYALTY").
+     * @param sponsoringBrand  Marca patrocinadora (solo si el modelo es "SPONSORED").
      */
-
     public Shop(String name, String description, int foundationYear, String businessModel, float loyaltyThreshold, String sponsoringBrand) {
         this.name = name;
         this.description = description;
@@ -57,12 +65,14 @@ public class Shop {
     /**
      * Constructor de la clase Shop.
      *
-     * @param name          Nombre de la tienda.
-     * @param description   Descripción de la tienda.
-     * @param since         Año de fundación de la tienda.
-     * @param earnings      Ganancias de la tienda.
-     * @param businessModel Modelo de negocio de la tienda.
-     * @param products      Catálogo de productos de la tienda.
+     * @param name             Nombre de la tienda.
+     * @param description      Descripción de la tienda.
+     * @param since            Año de fundación de la tienda.
+     * @param earnings         Ganancias de la tienda.
+     * @param businessModel    Modelo de negocio de la tienda.
+     * @param products         Catálogo de productos de la tienda.
+     * @param loyaltyThreshold Umbral de lealtad (solo si el modelo es "LOYALTY").
+     * @param sponsoringBrand  Marca patrocinadora (solo si el modelo es "SPONSORED").
      */
     public Shop(String name, String description, int since, float earnings, String businessModel, ProductCatalog products, float loyaltyThreshold, String sponsoringBrand) {
 
@@ -79,7 +89,6 @@ public class Shop {
 
     }
 
-    // Getters
 
     /**
      * Obtiene el nombre de la tienda.
@@ -144,19 +153,41 @@ public class Shop {
         this.earnings = earnings;
     }
 
-
+    /**
+     * Aplica un descuento al precio de un producto utilizando el modelo de negocio de la tienda.
+     *
+     * @param price Precio original del producto.
+     * @param iva   Valor del Impuesto al Valor Agregado (IVA) a aplicar al precio.
+     * @return Precio con descuento aplicado.
+     */
     public float descompte(Float price, int iva){
         return businessModelObject.descompte(price, iva);
     }
 
+    /**
+     * Establece el modelo de negocio de la tienda.
+     *
+     * @param businessModel Modelo de negocio a establecer.
+     */
     public void setBusinessModel(BusinessModel businessModel) {
         this.businessModelObject = businessModel;
     }
 
+    /**
+     * Obtiene el modelo de negocio actual de la tienda.
+     *
+     * @return Modelo de negocio de la tienda.
+     */
     public BusinessModel getBusinessModel() {
         return businessModelObject;
     }
 
+    /**
+     * Aplica el modelo de negocio de la tienda para calcular el precio final de un producto sin tener en cuenta el IVA.
+     *
+     * @param price Precio original del producto.
+     * @return Precio con el modelo de negocio aplicado.
+     */
     public float applyModel(float price) {
         return businessModelObject.descompte(price, 0);
     }

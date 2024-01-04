@@ -25,6 +25,12 @@ public class ProductCloud implements ProductDAO{
     private static Path path;
     ApiHelper api;
     String pathString;
+
+    /**
+     * Constructor de la clase ProductCloud. Inicializa los campos path, pathString y api para interactuar con la API de productos.
+     *
+     * @throws ApiException si ocurre una excepción ApiException durante la inicialización.
+     */
     public ProductCloud () throws ApiException {
             path = Path.of("https//balandrau.salle.url.edu/dpoo/P1-G109/products");
             pathString = "https://balandrau.salle.url.edu/dpoo/P1-G109/products";

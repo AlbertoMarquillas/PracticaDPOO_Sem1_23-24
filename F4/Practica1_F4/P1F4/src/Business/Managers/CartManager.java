@@ -21,7 +21,7 @@ public class CartManager {
     private Cart cart;
 
     /**
-     * Constructor de la clase CartManager.
+     * Constructor de la clase CartManager que crea un carrito vacío.
      */
     public CartManager() {
         this.cart = new Cart();
@@ -38,8 +38,9 @@ public class CartManager {
     }
 
     /**
-     * Calcula el precio total de la lista proporcionada.
-     * @return totalprice La suma total de todos los precios.
+     * Calcula el precio total de los productos en el carrito.
+     *
+     * @return totalPrice El precio total de todos los productos en el carrito.
      */
     public float sumTotalPrice() {
 
@@ -55,11 +56,10 @@ public class CartManager {
     }
 
     /**
-     * Confirma que el usuari haya ingresado "yes" por el teclado.
+     * Confirma si el usuario ingresó "yes" por teclado.
      *
-     * @param confirm String con info. introducida por el usuario.
-     *
-     * @return true o false dependiendo de si la cadena proporcionada es "yes" o no lo es.
+     * @param confirm La cadena introducida por el usuario.
+     * @return true si la cadena proporcionada es "yes", false en caso contrario.
      */
     public boolean confirmOK(String confirm) {
         return confirm.equalsIgnoreCase("yes");
@@ -68,15 +68,19 @@ public class CartManager {
     /**
      * Añade un producto con todas sus características descriptivas al carrito.
      *
-     * @param productName   Nombre del producto.
-     * @param brand         Marca del producto.
-     * @param shopName      Nombre de la tienda donde se vende el producto.
-     * @param price         Precio del producto.
-     * @param fundationYear
-     * @param descr
-     * @param earnings
-     * @param reviews
-     * @return
+     * @param productName     Nombre del producto.
+     * @param brand           Marca del producto.
+     * @param shopName        Nombre de la tienda donde se vende el producto.
+     * @param price           Precio del producto.
+     * @param category        Categoría del producto.
+     * @param fundationYear   Año de fundación de la tienda.
+     * @param descr           Descripción de la tienda.
+     * @param earnings        Ganancias de la tienda.
+     * @param businessModel   Modelo de negocio de la tienda.
+     * @param loyaltyThres    Umbral de lealtad (solo si el modelo es "LOYALTY").
+     * @param sponsor         Marca patrocinadora (solo si el modelo es "SPONSORED").
+     * @param reviews         Lista de revisiones del producto.
+     * @param thresholdLoyalty Umbral de lealtad para aplicar descuento (solo si el modelo es "LOYALTY").
      */
     public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor, ArrayList<String> reviews, float thresholdLoyalty) {
 
@@ -140,9 +144,9 @@ public class CartManager {
     }
 
     /**
-     * Obtiene los nombres de los productos del carrito.
+     * Obtiene los nombres de los productos en el carrito.
      *
-     * @return Un ArrayList de strings con los nombres de los productos del carrito.
+     * @return Un ArrayList de strings con los nombres de los productos en el carrito.
      */
     public ArrayList<String> getCartProds() {
 
@@ -156,9 +160,9 @@ public class CartManager {
     }
 
     /**
-     * Obtiene las marcas de los productos del carrito.
+     * Obtiene las marcas de los productos en el carrito.
      *
-     * @return Un ArrayList de strings con las marcas de los productos del carrito.
+     * @return Un ArrayList de strings con las marcas de los productos en el carrito.
      */
     public ArrayList<String> getCartBrands() {
 
@@ -172,9 +176,9 @@ public class CartManager {
     }
 
     /**
-     * Obtiene los precios de los productos del carrito.
+     * Obtiene los precios de los productos en el carrito.
      *
-     * @return Un ArrayList de floats con los precios de los productos del carrito.
+     * @return Un ArrayList de floats con los precios de los productos en el carrito.
      */
     public ArrayList<Float> getCartPrice() {
 
@@ -188,9 +192,9 @@ public class CartManager {
     }
 
     /**
-     * Obtiene las tiendas de los productos del carrito.
+     * Obtiene los nombres de las tiendas de los productos en el carrito.
      *
-     * @return Un ArrayList de strings con las tiendas de los productos del carrito.
+     * @return Un ArrayList de strings con los nombres de las tiendas de los productos en el carrito.
      */
     public ArrayList<String> getShopCart() {
 
@@ -210,7 +214,13 @@ public class CartManager {
         return shops;
     }
 
-
+    /**
+     * Calcula los impuestos para un producto en una tienda específica.
+     *
+     * @param shop Nombre de la tienda.
+     * @param i    Índice del producto en el carrito.
+     * @return El precio del producto con impuestos calculados.
+     */
     public float calculateTaxes(String shop, int i) {
 
         float prodPrice = 0;
@@ -226,6 +236,13 @@ public class CartManager {
 
     }
 
+    /**
+     * Calcula el precio original del producto con descuento si corresponde.
+     *
+     * @param price     Precio original del producto.
+     * @param cartItem  Ítem del carrito que contiene el producto.
+     * @return El precio original del producto con descuento si corresponde.
+     */
     private float originalPrice(float price, CartItem cartItem) {
         float totalRating = 0.0F;
         if (cartItem.getProduct().getCategory().equalsIgnoreCase("REDUCED")){
@@ -256,6 +273,11 @@ public class CartManager {
 
     }
 
+    /**
+     * Obtiene las cantidades de los productos en el carrito.
+     *
+     * @return Un ArrayList de strings con las cantidades de los productos en el carrito.
+     */
     public ArrayList<String> getCantidades() {
         ArrayList <String> cantidades = new ArrayList<>();
         ArrayList <CartItem> cartItems = cart.getCartItems();
@@ -273,22 +295,12 @@ public class CartManager {
         return cantidades;
     }
 
-    public Product getProductInShop(String shop) {
-        ArrayList<String> shops = new ArrayList<>();
-        ArrayList <CartItem> cartItems = cart.getCartItems();
-
-        for (CartItem cartItem: cartItems){
-            shops.add(cartItem.getShop().getName());
-        }
-
-        for (String shop1: shops){
-            if (shop1.equalsIgnoreCase(shop)){
-
-            }
-        }
-        return null;
-    }
-
+    /**
+     * Comprueba si la tienda seleccionada en el carrito tiene el modelo de negocio "LOYALTY".
+     *
+     * @param shop Nombre de la tienda.
+     * @return true si la tienda tiene el modelo "LOYALTY", false en caso contrario.
+     */
     public boolean isLoyality(String shop) {
 
         ArrayList<CartItem> cartItems = cart.getCartItems();
@@ -304,24 +316,13 @@ public class CartManager {
         return false;
     }
 
-    public boolean priceThreshold(String shop, float thresholdLoyalty) {
-
-
-        ArrayList<CartItem> cartItems = cart.getCartItems();
-
-        for (CartItem cartItem : cartItems) {
-            if (cartItem.getShop().getName().equalsIgnoreCase(shop) && cartItem.getShop().getBusinessModel().getModel().equalsIgnoreCase("LOYALTY")) {
-
-                if (thresholdLoyalty >  ((Loyalty)cartItem.getShop().getBusinessModel()).getLoyaltyThreshold()){
-                    return true;
-                }
-
-            }
-        }
-        return false;
-
-    }
-
+    /**
+     * Obtiene el precio de un producto específico en una tienda del carrito.
+     *
+     * @param shop    Nombre de la tienda.
+     * @param product Nombre del producto.
+     * @return El precio del producto en la tienda especificada en el carrito.
+     */
     public float getPriceProd(String shop, String product) {
         ArrayList<CartItem> cartItems = cart.getCartItems();
 
@@ -333,5 +334,23 @@ public class CartManager {
             }
         }
         return 0;
+    }
+
+    /**
+     * Establece el umbral de lealtad en el carrito.
+     *
+     * @param loyaltyThres Umbral de lealtad.
+     */
+    public void setLoyaltyThres(float loyaltyThres) {
+        cart.setThresholdLoyalty(loyaltyThres);
+    }
+
+    /**
+     * Obtiene el umbral de lealtad del carrito.
+     *
+     * @return El umbral de lealtad del carrito.
+     */
+    public float getLoyaltyThres() {
+        return cart.getThresholdLoyalty();
     }
 }

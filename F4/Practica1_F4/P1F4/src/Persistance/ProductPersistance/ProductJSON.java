@@ -106,7 +106,6 @@ public class ProductJSON implements ProductDAO {
         return true;
     }
 
-
     /**
      * Elimina los productos proporcionados en formato JSON.
      *

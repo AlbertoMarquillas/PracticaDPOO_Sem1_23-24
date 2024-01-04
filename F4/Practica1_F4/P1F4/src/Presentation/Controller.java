@@ -4,10 +4,7 @@ import Business.Managers.CartManager;
 import Business.Managers.ProductCatalogManager;
 import Business.Managers.ProductManager;
 import Business.Managers.ShopManager;
-import edu.salle.url.api.ApiHelper;
-import edu.salle.url.api.exception.ApiException;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 
@@ -23,9 +20,6 @@ public class Controller {
     private ShopManager shopManager;
     private ProductCatalogManager productCatalogManager;
     private CartManager cartManager;
-
-    float thresholdLoyalty = 0;
-
     static final int CLOUD = 0;
     static final int JSON = 1;
     static final int ERROR = -1;
@@ -45,20 +39,6 @@ public class Controller {
     public void run() {
 
         int option = 0;
-
-
-        /*try {
-            ApiHelper apiHelper = new ApiHelper();
-            String pathString = "https://balandrau.salle.url.edu/dpoo/P1-G109/shops";
-            String pathString2 = "https://balandrau.salle.url.edu/dpoo/P1-G109/products";
-
-            apiHelper.deleteFromUrl(pathString);
-            apiHelper.deleteFromUrl(pathString2);
-
-        } catch (ApiException e) {
-            throw new RuntimeException(e);
-        }*/
-
 
         startProgram();
         int data = checkProgram();
@@ -84,7 +64,7 @@ public class Controller {
                     case 5 -> yourCart();
                     case 6 ->{
                         view.showExit();
-                        thresholdLoyalty = 0;
+                        cartManager.setLoyaltyThres(0);
                     }
 
                     default -> view.showWrongOption(1, 6);
@@ -95,15 +75,23 @@ public class Controller {
         }
     }
 
+    /**
+     * Inicia el programa mostrando un título y un mensaje de bienvenida.
+     */
     public void startProgram() {
         view.showTitle();
         view.showWelcome();
     }
 
+    /**
+     * Verifica el estado del programa y determina si se utiliza la nube o JSON.
+     *
+     * @return  CLOUD si se utiliza la nube, JSON si se utiliza JSON, ERROR si hay un error.
+     */
     private int checkProgram() {
         this.productManager = new ProductManager(CLOUD);
 
-        view.showCheckStartus();
+        view.showCheckStatus();
 
         if (productManager.isUsingCloud()) {
             return CLOUD;
@@ -574,7 +562,7 @@ public class Controller {
      */
     public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor, ArrayList<String> reviews) {
 
-        cartManager.addToCart(productName, brand, shopName, price, category, fundationYear, descr, earnings, businessModel, loyaltyThres, sponsor, reviews, thresholdLoyalty);
+        cartManager.addToCart(productName, brand, shopName, price, category, fundationYear, descr, earnings, businessModel, loyaltyThres, sponsor, reviews, cartManager.getLoyaltyThres());
 
         view.spacing();
         view.showAddToCart(productName, brand);
@@ -663,6 +651,12 @@ public class Controller {
             }
         }
     }
+
+    /**
+     * Calcula los impuestos y actualiza los ingresos de las tiendas durante el proceso de finalización de compra.
+     *
+     * @param shops Lista de nombres de tiendas de los productos en el carrito.
+     */
     private void calculTaxes(ArrayList<String> shops){
         float price = 0;
         float thres = 0;
@@ -683,7 +677,7 @@ public class Controller {
                         shopManager.updateEarnings(earnings, shop);
                         i++;
                         if (cartManager.isLoyality(shop)){
-                            thresholdLoyalty = thresholdLoyalty + prodPrice;
+                            cartManager.setLoyaltyThres(cartManager.getLoyaltyThres() + prodPrice);
                         }
                 }
             }

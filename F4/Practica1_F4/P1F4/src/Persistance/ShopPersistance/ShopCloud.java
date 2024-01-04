@@ -29,6 +29,12 @@ public class ShopCloud implements ShopDAO{
     private static Path path;
     ApiHelper api;
     String pathString;
+
+    /**
+     * Constructor de la clase ShopCloud. Inicializa los campos path, pathString y api para interactuar con la API de tiendas.
+     *
+     * @throws RuntimeException si ocurre una IOException durante la inicialización.
+     */
     public ShopCloud () {
         try {
             path = Path.of("https//balandrau.salle.url.edu/dpoo/P1-G109/shops");
@@ -38,6 +44,7 @@ public class ShopCloud implements ShopDAO{
             throw new RuntimeException(e);
         }
     }
+
     /**
      * Lee todas las tiendas almacenadas en la API.
      *
@@ -125,7 +132,7 @@ public class ShopCloud implements ShopDAO{
         }
     }
 
-        /**
+    /**
      * Actualiza la información de las tiendas proporcionadas en la API.
      *
      * @param shop Tienda que se agregará.
@@ -152,11 +159,7 @@ public class ShopCloud implements ShopDAO{
                 e.printStackTrace();
             }
         }
-        if (flag == currentShops.size()) {
-            return true;
-        }
-
-        return false;
+        return flag == currentShops.size();
     }
 
     /**

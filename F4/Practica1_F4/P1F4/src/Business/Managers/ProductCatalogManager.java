@@ -21,6 +21,7 @@ public class ProductCatalogManager {
 
     ShopManager shopManager;
     ProductManager productManager;
+
     /**
      * Constructor de la clase ProductCatalogManager.
      */
@@ -101,7 +102,6 @@ public class ProductCatalogManager {
      *
      * @return la posición del producto en la lista de productos de la tienda.
      */
-
     private int positionFromName(String product, String shopName) {
         int i;
         ArrayList<String> prods = listProducts(shopName);

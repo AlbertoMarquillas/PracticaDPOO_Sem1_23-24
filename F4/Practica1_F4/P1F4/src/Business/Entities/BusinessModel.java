@@ -6,9 +6,6 @@ package Business.Entities;
  */
 public abstract class BusinessModel {
 
-    // Atributos
-    private String model;
-
     /**
      * Constructor de la clase BusinessModel.
      */
@@ -16,8 +13,21 @@ public abstract class BusinessModel {
 
     }
 
+
+    /**
+     * Obtiene el nombre o modelo del negocio.
+     *
+     * @return Nombre o modelo del negocio.
+     */
     public abstract String getModel();
 
+    /**
+     * Calcula un descuento o ajuste de precio basado en el precio original y el impuesto (IVA).
+     *
+     * @param price Precio original del producto.
+     * @param iva   Impuesto (IVA) aplicado al producto.
+     * @return Precio ajustado después del descuento o ajuste.
+     */
     public abstract float descompte(Float price, int iva);
 
 

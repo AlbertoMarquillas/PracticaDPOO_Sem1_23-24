@@ -23,7 +23,7 @@ public abstract class Product {
      * @param brand    Marca del producto.
      * @param category Categoría del producto.
      * @param maxPrice Precio máximo del producto.
-     * @param rating   Valoración del producto.
+     * @param rating   Lista de calificaciones del producto.
      */
     public Product(String name, String brand, String category, float maxPrice, ArrayList<String> rating) {
         this.name = name;
@@ -99,6 +99,11 @@ public abstract class Product {
         return maxPrice;
     }
 
+    /**
+     * Establece el precio máximo del producto.
+     *
+     * @param maxPrice Precio máximo del producto.
+     */
     public void setMaxPrice(float maxPrice) {
         this.maxPrice = maxPrice;
     }
@@ -113,9 +118,9 @@ public abstract class Product {
     }
 
     /**
-     * Establece la puntuación de un producto.
+     * Establece todas las calificaciones de un producto.
      *
-     * @param rating Puntuación del producto.
+     * @param rating Lista de calificaciones del producto.
      */
     public void setAllRating(ArrayList<String> rating) {
 
@@ -126,18 +131,39 @@ public abstract class Product {
         this.rating.clear();
         this.rating.addAll(rating);
     }
+
+    /**
+     * Establece una calificación adicional de un producto.
+     *
+     * @param rating Calificación adicional del producto.
+     */
     public void setRating(String rating) {
         this.rating.add(rating);
     }
 
+    /**
+     * Obtiene la categoría del producto.
+     *
+     * @return Categoría del producto.
+     */
     public String getCategory() {
         return category;
     }
 
-    public abstract float applyIVA(float price);
-
+    /**
+     * Obtiene el valor del IVA para el producto.
+     *
+     * @return Valor del IVA del producto.
+     */
     public abstract int getIva();
 
+    /**
+     * Calcula el precio original del producto considerando una calificación promedio.
+     *
+     * @param price       Precio del producto antes de aplicar descuentos.
+     * @param totalRating Calificación promedio del producto.
+     * @return Precio original del producto después de aplicar descuentos.
+     */
     public abstract float originalPrice(float price, float totalRating);
 }
 

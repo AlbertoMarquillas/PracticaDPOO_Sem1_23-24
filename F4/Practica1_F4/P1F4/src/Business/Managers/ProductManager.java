@@ -22,7 +22,9 @@ public class ProductManager {
     private ProductDAO productDAO;
 
     /**
-     * Constructor de ProductManager.
+     * Constructor de ProductManager que permite seleccionar la fuente de datos para los productos.
+     *
+     * @param optionData La opción que determina si se utilizará almacenamiento en la nube (0) o almacenamiento local (1).
      */
     public ProductManager(int optionData) {
         switch (optionData) {
@@ -48,6 +50,11 @@ public class ProductManager {
         }
     }
 
+    /**
+     * Comprueba si el sistema está utilizando almacenamiento en la nube para los datos de productos.
+     *
+     * @return true si el sistema utiliza almacenamiento en la nube para los datos de productos, false en caso contrario.
+     */
     public boolean isUsingCloud() {
         return this.productDAO instanceof ProductCloud;
     }
@@ -134,8 +141,6 @@ public class ProductManager {
         }
         return true;
     }
-
-
 
     /**
      * Formatea la cadena proporcionada según un formato específico.
@@ -304,21 +309,6 @@ public class ProductManager {
     }
 
     /**
-     * Verifica la existencia de productos en el archivo JSON.
-     *
-     * @throws RuntimeException si se produce una FileNotFoundException al intentar leer el archivo JSON.
-     *
-     * @return true si hay productos en el archivo JSON, false si el archivo está vacío.
-     */
-    public boolean checkProductJSON() {
-        try {
-            return productDAO.readAll() != null;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
      * Confirma si el usuario quiere eliminar algo según la cadena que introduce.
      *
      * @param str la cadena introducida por el usuario
@@ -429,15 +419,11 @@ public class ProductManager {
 
     }
 
-    public boolean checkProductAPI() {
-
-        try {
-            return productDAO.readAll() != null;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+    /**
+     * Comprueba si el sistema está utilizando almacenamiento local para los datos de productos.
+     *
+     * @return true si el sistema utiliza almacenamiento local para los datos de productos, false en caso contrario.
+     */
     public boolean isUsingLocal() {
         return this.productDAO instanceof ProductJSON;
     }

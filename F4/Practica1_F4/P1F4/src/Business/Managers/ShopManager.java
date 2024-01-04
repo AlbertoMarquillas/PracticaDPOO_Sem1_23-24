@@ -1,11 +1,11 @@
 package Business.Managers;
 
-import Business.Entities.BusinessModel;
 import Business.Entities.HerenciasShop.Loyalty;
 import Business.Entities.HerenciasShop.Sponsored;
 import Business.Entities.Product;
 import Business.Entities.ProductCatalog;
 import Business.Entities.Shop;
+
 import Persistance.ShopPersistance.ShopCloud;
 import Persistance.ShopPersistance.ShopDAO;
 import Persistance.ShopPersistance.ShopJSON;
@@ -23,7 +23,9 @@ public class ShopManager {
     private ShopDAO shopDAO;
 
     /**
-     * Constructor de la clase ShopManager.
+     * Constructor de la clase ShopManager que permite seleccionar la fuente de datos para las tiendas.
+     *
+     * @param optionData La opción que determina si se utilizará almacenamiento en la nube (0) o almacenamiento local (1).
      */
     public ShopManager(int optionData) {
         try {
@@ -43,8 +45,8 @@ public class ShopManager {
      * @param description      Descripción de la tienda.
      * @param foundingYear     Año de fundación de la tienda.
      * @param businessModel    Modelo de negocio de la tienda.
-     * @param loyaltyThreshold
-     * @param sponsoringBrand
+     * @param loyaltyThreshold Umbral de lealtad de la tienda (solo aplicable si el modelo de negocio es "LOYALTY").
+     * @param sponsoringBrand  Marca patrocinadora de la tienda (solo aplicable si el modelo de negocio es "SPONSORED").
      * @return true si la tienda se creó correctamente, false en caso contrario.
      */
     public boolean createShop(String name, String description, int foundingYear, String businessModel, float loyaltyThreshold, String sponsoringBrand) {
@@ -162,12 +164,11 @@ public class ShopManager {
     /**
      * Identifica y obtiene una tienda según la cadena que se le proporciona.
      *
-     * @param shops Lista de tiendas con la que se busca la tienda en cuestión.
      * @param shopName Cadena que representa la tienda que se quiere encontrar.
      *
      * @return La tienda que coincide con la cadena proporcionada encontrada en la lista de tiendas, null si no coincide.
      */
-    public Shop shopFromString(ArrayList<Shop> shops, String shopName) {
+    public Shop shopFromString(String shopName) {
         ArrayList<Shop> shopArrayList = readAll();
         for (Shop shop: shopArrayList)
             if(shop.getName().equalsIgnoreCase(shopName)){
@@ -186,8 +187,7 @@ public class ShopManager {
      */
     public boolean addProductToCatalogue(String shop, ProductCatalog productCatalog) {
 
-        ArrayList<Shop> shops = readAll();
-        Shop finalShop = shopFromString(shops, shop);
+        Shop finalShop = shopFromString(shop);
 
         try {
             finalShop.setProductCatalog(productCatalog);
@@ -206,8 +206,7 @@ public class ShopManager {
      * @return true si se ha podido eliminar el catálogo, false si no se ha podido.
      */
     public boolean removeProductToCatalogue(String shopName, ProductCatalog productCatalog) {
-        ArrayList<Shop> shops = readAll();
-        Shop finalShop = shopFromString(shops, shopName);
+        Shop finalShop = shopFromString(shopName);
         try {
             finalShop.setProductCatalog(productCatalog);
             return shopDAO.update(finalShop);
@@ -239,7 +238,7 @@ public class ShopManager {
      */
     public boolean prodInShop(String product, String shopName) {
 
-        Shop shop = shopFromString(readAll(), shopName);
+        Shop shop = shopFromString(shopName);
         ArrayList<String> prodsCat = shop.getProductCatalog().toArrayString();
 
         for(String prodCat: prodsCat) {
@@ -259,10 +258,10 @@ public class ShopManager {
      * @return el precio del producto en la tienda proporcionada.
      */
     public float getProductPriceShop(String prod, String shopName) {
-        Shop shop = shopFromString(readAll(), shopName);
+        Shop shop = shopFromString(shopName);
         ProductCatalog productCatalog = shop.getProductCatalog();
 
-        return productCatalog.searchForProductPrice(prod, productCatalog);//productCatalogManager.searchForProductPrice(prod, productCatalog);
+        return productCatalog.searchForProductPrice(prod, productCatalog);
 
     }
 
@@ -404,6 +403,12 @@ public class ShopManager {
         }
     }
 
+    /**
+     * Obtiene las categorías de productos de una tienda especificada por su nombre.
+     *
+     * @param shopName Nombre de la tienda de la que se desean obtener las categorías de productos.
+     * @return ArrayList de cadenas que contiene las categorías de productos de la tienda.
+     */
     public ArrayList<String> getCatFromCat(String shopName) {
         ArrayList<Shop> shops = readAll();
         ArrayList<String> categories = new ArrayList<>();
@@ -423,22 +428,32 @@ public class ShopManager {
         return categories;
     }
 
+    /**
+     * Obtiene el modelo de negocio de una tienda especificada por su nombre.
+     *
+     * @param shopName Nombre de la tienda de la que se desea obtener el modelo de negocio.
+     * @return Cadena que representa el modelo de negocio de la tienda.
+     */
     public String getBusinessModel(String shopName) {
         ArrayList<Shop> shops = readAll();
-        BusinessModel businessModel = null;
 
         for(Shop shop: shops){
             if(shop.getName().equalsIgnoreCase(shopName)){
 
-                 businessModel = shop.getBusinessModel();
-                 break;
+                 return shop.getBusinessModel().getModel();
 
             }
         }
 
-        return businessModel.getModel();
+        return null;
     }
 
+    /**
+     * Obtiene una tienda a partir de su nombre.
+     *
+     * @param shop Nombre de la tienda que se desea obtener.
+     * @return Objeto Shop correspondiente a la tienda encontrada, o null si no se encuentra.
+     */
     public Shop getShopFromString(String shop) {
         ArrayList<Shop> shops = readAll();
         for (Shop shop1: shops){
@@ -449,16 +464,35 @@ public class ShopManager {
         return null;
     }
 
+    /**
+     * Obtiene el umbral de lealtad de una tienda especificada por su nombre.
+     *
+     * @param shopName Nombre de la tienda de la que se desea obtener el umbral de lealtad.
+     * @return Umbral de lealtad de la tienda en forma de valor flotante.
+     */
     public float getLoyalty(String shopName) {
         Shop shop = getShopFromString(shopName);
         return ((Loyalty)shop.getBusinessModel()).getLoyaltyThreshold();
     }
 
+    /**
+     * Obtiene la marca patrocinadora de una tienda especificada por su nombre.
+     *
+     * @param shopName Nombre de la tienda de la que se desea obtener la marca patrocinadora.
+     * @return Cadena que representa la marca patrocinadora de la tienda.
+     */
     public String getSponsor(String shopName) {
         Shop shop = getShopFromString(shopName);
         return ((Sponsored)shop.getBusinessModel()).getSponsoringBrand();
     }
 
+    /**
+     * Obtiene las calificaciones de un producto específico de una tienda por su nombre de producto y nombre de tienda.
+     *
+     * @param shopName Nombre de la tienda en la que se encuentra el producto.
+     * @param prodName Nombre del producto del que se desean obtener las calificaciones.
+     * @return ArrayList de cadenas que contiene las calificaciones del producto en la tienda.
+     */
     public ArrayList<String> getRatingFromCat(String shopName, String prodName) {
         ArrayList<String> ratings = new ArrayList<>();
         ArrayList<Shop> shops = readAll();
@@ -476,6 +510,12 @@ public class ShopManager {
         return ratings;
     }
 
+    /**
+     * Agrega una calificación a un producto específico en el catálogo de una tienda.
+     *
+     * @param prod Nombre del producto al que se agregará la calificación.
+     * @param finalRating Calificación final a agregar en formato de cadena.
+     */
     public void addProductToCatalogueRaiting(String prod,String finalRating) {
         ArrayList<Shop> shops = readAll();
 
