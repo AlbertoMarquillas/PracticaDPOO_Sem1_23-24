@@ -54,7 +54,7 @@ public class Reduced extends Product {
      * @return Precio original calculado después de aplicar el IVA correspondiente.
      */
     @Override
-    public float originalPrice(float price, float totalRating) {
+    public float originalPrice(float price, float totalRating) { //si totalRating for atribut protected.... no faria falta pasar-li, el mateix pasa a shop amb iva
 
         if (totalRating > 3.5) {
             return (float) ((price) / (1.0 + (getReducedIva()/100.0)));
