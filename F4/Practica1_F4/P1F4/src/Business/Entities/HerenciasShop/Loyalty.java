@@ -46,7 +46,7 @@ public class Loyalty extends BusinessModel {
      * @return Precio después del descuento, si el cliente cumple con el umbral de lealtad; de lo contrario, el precio original.
      */
     @Override
-    public float descompte(Float price, int iva) {
+    public float descompte(float price, int iva) {
 
         return (float) ((price/(1.0 + (iva/100.0))));
     }

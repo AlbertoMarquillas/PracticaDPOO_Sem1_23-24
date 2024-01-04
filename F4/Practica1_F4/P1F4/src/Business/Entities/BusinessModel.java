@@ -9,10 +9,7 @@ public abstract class BusinessModel {
     /**
      * Constructor de la clase BusinessModel.
      */
-    public BusinessModel() {
-
-    }
-
+    public BusinessModel() {}
 
     /**
      * Obtiene el nombre o modelo del negocio.
@@ -28,7 +25,7 @@ public abstract class BusinessModel {
      * @param iva   Impuesto (IVA) aplicado al producto.
      * @return Precio ajustado después del descuento o ajuste.
      */
-    public abstract float descompte(Float price, int iva);
+    public abstract float descompte(float price, int iva);
 
 
 }

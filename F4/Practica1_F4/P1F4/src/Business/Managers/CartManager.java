@@ -84,19 +84,15 @@ public class CartManager {
      */
     public void addToCart(String productName, String brand, String shopName, Float price, String category, int fundationYear, String descr, float earnings, String businessModel, float loyaltyThres, String sponsor, ArrayList<String> reviews, float thresholdLoyalty) {
 
+
         boolean added = false;
 
         ArrayList <CartItem> cartItems = cart.getCartItems();
 
-        for (CartItem cartItem: cartItems) {
-            if (cartItem.getProduct().getName().equalsIgnoreCase(productName)){
+        added = updateProduct(cartItems, productName, price);
 
-                cartItem.setCantidad(cartItem.getCantidad()+1);
-                cartItem.getProduct().setPrice(cartItem.getProduct().getPrice() + price);
-                added = true;
-            }
-        }
         if (!added) {
+
             Shop shop = null;
             Product product = null;
             CartItem cartItem = new CartItem();
@@ -115,8 +111,6 @@ public class CartManager {
                     shop = new Shop(shopName,descr, fundationYear, businessModel, loyaltyThres, null);
 
                     if (thresholdLoyalty > loyaltyThres) {
-
-                        //aplicar descompte
 
                         price = shop.descompte(price, cartItem.getProduct().getIva());
                         product.setPrice(price);
@@ -141,6 +135,28 @@ public class CartManager {
 
         }
 
+    }
+    /**
+     * Actualiza la cantidad y el precio de un producto específico en una lista de elementos del carrito.
+     * Este método busca un producto por su nombre en la lista de elementos del carrito. Si lo encuentra,
+     * incrementa la cantidad del producto en uno y actualiza su precio sumando el precio adicional proporcionado.
+     * Si el producto se actualiza con éxito, el método devuelve true.
+     *
+     * @param cartItems   La lista de elementos del carrito donde se buscará y actualizará el producto.
+     * @param productName El nombre del producto a buscar y actualizar.
+     * @param price       El precio adicional a sumar al precio actual del producto.
+     * @return            true si el producto se encuentra y se actualiza con éxito, false en caso contrario.
+     */
+    private boolean updateProduct(ArrayList<CartItem> cartItems, String productName, float price) {
+        for (CartItem cartItem: cartItems) {
+            if (cartItem.getProduct().getName().equalsIgnoreCase(productName)){
+
+                cartItem.setCantidad(cartItem.getCantidad()+1);
+                cartItem.getProduct().setPrice(cartItem.getProduct().getPrice() + price);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

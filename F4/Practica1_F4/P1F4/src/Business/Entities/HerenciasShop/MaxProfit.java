@@ -33,7 +33,7 @@ public class MaxProfit extends BusinessModel {
      * @return Precio después del descuento (en este caso, sin descuento, por lo que devuelve el precio original).
      */
     @Override
-    public float descompte(Float price, int iva) {
+    public float descompte(float price, int iva) {
         return 0;
     }
 }
