@@ -1,0 +1,8 @@
+unnamed package
+Business.Entities
+Business.Entities.HerenciasProduct
+Business.Entities.HerenciasShop
+Business.Managers
+Persistance.ProductPersistance
+Persistance.ShopPersistance
+Presentation

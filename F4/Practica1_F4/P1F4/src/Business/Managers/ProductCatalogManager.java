@@ -1,16 +1,9 @@
 package Business.Managers;
 
-import Business.Entities.HerenciasProduct.General;
-import Business.Entities.HerenciasProduct.Reduced;
-import Business.Entities.HerenciasProduct.SuperReduced;
-import Business.Entities.HerenciasShop.Loyalty;
-import Business.Entities.HerenciasShop.MaxProfit;
-import Business.Entities.HerenciasShop.Sponsored;
+
 import Business.Entities.Product;
 import Business.Entities.ProductCatalog;
-import Business.Entities.Shop;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -19,11 +12,13 @@ import java.util.ArrayList;
  */
 public class ProductCatalogManager {
 
-    ShopManager shopManager;
-    ProductManager productManager;
+    private ShopManager shopManager;
+    private ProductManager productManager;
 
     /**
      * Constructor de la clase ProductCatalogManager.
+     *
+     * @param optionData la opcion para seleccionar la persistencia de los datos
      */
     public ProductCatalogManager(int optionData) {
         this.shopManager = new ShopManager(optionData);
@@ -39,8 +34,6 @@ public class ProductCatalogManager {
      * @return true si la operación fue exitosa, false en caso contrario.
      */
     public boolean addProduct(String product, String shop, float productPrice) {
-
-        Shop shop1 = shopManager.getShopFromString(shop);
 
         ProductCatalog productCatalog = shopManager.getProductCatalog(shop);
 

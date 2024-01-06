@@ -673,6 +673,7 @@ public class View {
      * @param productsCarts ArrayList de strings con los productos de un carrito.
      * @param brands ArrayList de strings con las marcas de los productos de un carrito.
      * @param prices ArrayList de floats con los precios de los productos de un carrito.
+     * @param cantidades ArrayList de strings con las cantidades de los productos en un carrito
      */
     public void totalCart(ArrayList<String> productsCarts, ArrayList<String> brands, ArrayList<Float> prices, ArrayList<String> cantidades) {
         int i = 0;
