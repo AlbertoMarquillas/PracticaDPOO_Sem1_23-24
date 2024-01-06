@@ -3,11 +3,10 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/P1F4/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Practica1_F4/P1F4/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="ApiHelper" level="project" />
   </component>
 </module>

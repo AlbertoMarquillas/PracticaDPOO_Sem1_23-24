@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="ApiHelper">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/ApiHelper-Resources/ApiHelper.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
