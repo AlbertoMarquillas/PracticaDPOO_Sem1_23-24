@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Practica1_F4/P1F4/lib/ApiHelper.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Practica1_F4/P1F4/lib/gson-2.10.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
